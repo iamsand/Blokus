@@ -2,6 +2,10 @@ package framework;
 
 import java.util.Arrays;
 
+/**
+ * This class represents a game piece shape.
+ * Shape objects are immutable.
+ */
 public final class Shape {
 
     // [coordinate index][0] -> x
@@ -15,10 +19,21 @@ public final class Shape {
         }
     }
     
+    public int[][] getCoordinates() {
+        // necessary to return a deep copy because arrays are not read-only
+        int[][] c = new int[this.coords.length][2];
+        
+        for (int i = 0; i < c.length; i++) {
+            c[i] = Arrays.copyOf(this.coords[i], 2);
+        }
+        
+        return c;
+    }
+    
     public Shape rotateCW(int n) {
         return new Shape(Shape.rotateCW(coords, n));
     }
-
+    
     private static int[][] rotateCW(int[][] a, int n) {
         if (n < 1) {
             return a;

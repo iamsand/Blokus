@@ -8,7 +8,15 @@ public final class Action {
     
     public final Shape shape;
     public final Color color;
+    
+    /**
+     * X-coordinate of action (left is zero).
+     */
     public final int x;
+    
+    /**
+     * Y-coordinate of action (top is zero).
+     */
     public final int y;
     
     public Action(Shape shape, Color color, int x, int y) {

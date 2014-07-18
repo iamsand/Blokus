@@ -11,6 +11,12 @@ public class Tester {
         System.out.println(s.toConsoleString());
         s.rotateCW(1);
         System.out.println(s.toConsoleString());
+        
+        Board b = new Board();
+        System.out.println(b.toConsoleMiniString());
+        
+        b.doAction(new Action(s, Color.BLUE, 3, 3));
+        System.out.println(b.toConsoleMiniString());
     }
     
 }

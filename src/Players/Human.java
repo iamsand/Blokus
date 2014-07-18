@@ -1,5 +1,6 @@
 package Players;
 
+import framework.Action;
 import java.util.Scanner;
 
 import framework.Board;
@@ -11,9 +12,9 @@ public class Human implements IPlayer{
 	Scanner sc = new Scanner(System.in);
 	
 	@Override
-	public void getAction() {
+	public Action getAction() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

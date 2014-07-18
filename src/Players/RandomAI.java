@@ -1,5 +1,6 @@
 package Players;
 
+import framework.Action;
 import framework.Board;
 import framework.Color;
 import framework.IPlayer;
@@ -7,9 +8,9 @@ import framework.IPlayer;
 public class RandomAI implements IPlayer{
 
 	@Override
-	public void getAction() {
+	public Action getAction() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class Board {
 				b[r][c] = Color.NULL;
 	}
 
-	public boolean isAddShapeLegal(int[][] s, int x, int y) {
+	public boolean isActionLegal(Action action) {
 		return false;
 	}
 	

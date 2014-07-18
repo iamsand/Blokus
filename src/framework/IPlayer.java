@@ -6,6 +6,6 @@ public interface IPlayer {
 	
 	Color getColor();
 	
-	void getAction();
+	Action getAction();
 
 }

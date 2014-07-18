@@ -1,23 +1,31 @@
 package framework;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-// This represents the shapes a player possess.
+/**
+ * This represents the shapes a player possesses.
+ */
 public class Hand {
 
-	public static final ArrayList<Shape>	allShapes	= new ArrayList(Arrays.asList(Shape.values()));
+    private Color c;  // <-- is this necessary? seems like Color is bound to a player, not the player's hand
+    
+    private final ArrayList<Shape> hand;
 
-	private Color							c;
-	private ArrayList<Shape>				hand		= new ArrayList<Shape>();
+    public Hand(Color c) {
+        this.c = c;
+        this.hand = new ArrayList();
+        
+        for (int[][] pieceData : Misc.mono) { this.hand.add(new Shape(pieceData)); }
+        for (int[][] pieceData : Misc.domi) { this.hand.add(new Shape(pieceData)); }
+        for (int[][] pieceData : Misc.trom) { this.hand.add(new Shape(pieceData)); }
+        for (int[][] pieceData : Misc.tetr) { this.hand.add(new Shape(pieceData)); }
+        for (int[][] pieceData : Misc.pent) { this.hand.add(new Shape(pieceData)); }
+    }
 
-	public Hand(Color c) {
-		this.c = c;
-		hand = (ArrayList<Shape>) allShapes.clone();
-	}
-	
-	public void remove(int index){
-		if (index < hand.size())
-			hand.remove(index);
-	}
+    public void remove(int index) {
+        try {
+            hand.remove(index);
+        } catch (IndexOutOfBoundsException ex) {}
+    }
+    
 }

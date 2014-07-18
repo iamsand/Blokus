@@ -6,7 +6,7 @@ public class Shape {
 
     // [coordinate index][0] -> x
     // [coordinate index][1] -> y
-    private int[][] coords;
+    private final int[][] coords;
 
     public Shape(int[][] coords) {
         this.coords = new int[coords.length][];
@@ -15,8 +15,8 @@ public class Shape {
         }
     }
     
-    public void rotateCW(int n) {
-        this.coords = Shape.rotateCW(coords, n);
+    public Shape rotateCW(int n) {
+        return new Shape(Shape.rotateCW(coords, n));
     }
 
     private static int[][] rotateCW(int[][] a, int n) {

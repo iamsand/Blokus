@@ -3,7 +3,7 @@ package framework;
 public class Board {
 
 	// This will represent the visual board.
-	Color[][]	b;
+	private Color[][] b;
 
 	// This will keep track of the individual pieces.
 	// TODO: put some sort of map here
@@ -15,7 +15,7 @@ public class Board {
 				b[r][c] = Color.NULL;
 	}
 
-	public boolean addShapeIsLegal(int[][] s, int x, int y){
+	public boolean isAddShapeLegal(int[][] s, int x, int y) {
 		return false;
 	}
 	

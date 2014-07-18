@@ -3,9 +3,9 @@ package framework;
 public enum Color {
 	NULL(" "), BLUE("B"), YELLOW("Y"), RED("R"), GREEN("G");
 
-	private String	first;
+	private final String first;
 
-	Color(String first) {
+	private Color(String first) {
 		this.first = first;
 	}
 
@@ -13,4 +13,5 @@ public enum Color {
 	public String toString() {
 		return first;
 	}
+    
 }

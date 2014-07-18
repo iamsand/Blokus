@@ -2,7 +2,7 @@ package framework;
 
 import java.util.Arrays;
 
-public class Shape {
+public final class Shape {
 
     // [coordinate index][0] -> x
     // [coordinate index][1] -> y

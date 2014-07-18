@@ -1,10 +1,21 @@
 package framework;
 
-public class Action {
+/**
+ * This class represents a game move.
+ * Action objects are immutable.
+ */
+public final class Action {
     
-    private Shape shape;
-    private Color color;
-    private int x;
-    private int y;
+    public final Shape shape;
+    public final Color color;
+    public final int x;
+    public final int y;
+    
+    public Action(Shape shape, Color color, int x, int y) {
+        this.shape = shape;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
     
 }

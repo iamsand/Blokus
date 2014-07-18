@@ -1,6 +1,7 @@
 package framework;
 
 public enum Color {
+    
 	NULL(" "), BLUE("B"), YELLOW("Y"), RED("R"), GREEN("G");
 
 	private final String first;

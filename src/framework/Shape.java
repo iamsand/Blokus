@@ -11,7 +11,13 @@ public enum Shape {
 		this.coords = coords;
 	}
 
-	private int[][] rotate(int[][] rotateme) {
+	public int[][] rotate(int[][] a, int n) {
+		if (n < 1)
+			return a;
+		return rotate(rotate(a), n % 4 - 1);
+	}
+
+	public int[][] rotate(int[][] rotateme) {
 		return null;
 	}
 

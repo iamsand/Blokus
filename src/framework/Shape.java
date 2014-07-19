@@ -6,14 +6,14 @@ import java.util.Arrays;
 /**
  * This class represents a game piece shape. Shape objects are immutable.
  */
-public final class Shape implements Comparable<Shape>{
+public final class Shape implements Comparable<Shape> {
 
 	private final PieceName name;
 	// [coordinate index][0] -> x
 	// [coordinate index][1] -> y
 	private final int[][]	coords;
 
-	public Shape(PieceName name,int[][] coords) {
+	public Shape(PieceName name, int[][] coords) {
 		this.name = name;
 		this.coords = new int[coords.length][];
 		for (int i = 0; i < coords.length; i++) {
@@ -29,7 +29,7 @@ public final class Shape implements Comparable<Shape>{
 		return c;
 	}
 	
-	public int getSize(){
+	public int getSize() {
 		return coords.length;
 	}
 	
@@ -64,28 +64,28 @@ public final class Shape implements Comparable<Shape>{
 	}
 	
 	@Override
-	public String toString(){
+	public String toString() {
 		return name.toString();
 	}
 	
 	@Override
-	public int compareTo(Shape s){
+	public int compareTo(Shape s) {
 		if (this.name==s.name)
 			return 1;
 		return 0;
 	}
 
-	public ArrayList<Shape> getAllPermutations(){
-		ArrayList<Shape> perms = new ArrayList<Shape>();
-		perms.add(this);
-		for (int i = 0; i<3;i++){
-			perms.add(perms.get(perms.size()-1).rotateCW(1));
-		}
-		perms.add(this.reflectHorizontal());
-		for (int i = 0; i<3;i++){
-			perms.add(perms.get(perms.size()-1).rotateCW(1));
-		}
-		return perms;
+	public ArrayList<Shape> getAllPermutations() {
+        ArrayList<Shape> perms = new ArrayList<Shape>();
+        perms.add(this);
+        for (int i = 0; i < 3; i++) {
+            perms.add(perms.get(perms.size() - 1).rotateCW(1));
+        }
+        perms.add(this.reflectHorizontal());
+        for (int i = 0; i < 3; i++) {
+            perms.add(perms.get(perms.size() - 1).rotateCW(1));
+        }
+        return perms;
 	}
 	
 	public String toConsoleString() {

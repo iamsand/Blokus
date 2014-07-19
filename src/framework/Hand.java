@@ -27,7 +27,7 @@ public class Hand {
     }
     
     // We could also make "hand" public and just have Game pass copies of hand to IPlayers.
-    public ArrayList<Shape> view(){
+    public ArrayList<Shape> view() {
     	// This is okay because shapes are immutable. 
     	ArrayList<Shape> copy = new ArrayList<Shape>();
     	copy.addAll(hand);

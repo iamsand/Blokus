@@ -1,13 +1,7 @@
 package Players;
 
+import framework.*;
 import java.util.ArrayList;
-
-import framework.Action;
-import framework.Board;
-import framework.Color;
-import framework.Hand;
-import framework.IPlayer;
-import framework.Shape;
 
 public class RandomAI implements IPlayer{
 

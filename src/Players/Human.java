@@ -1,24 +1,16 @@
 package Players;
 
-import framework.Action;
-
+import framework.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import framework.Board;
-import framework.Color;
-import framework.Hand;
-import framework.IPlayer;
-import framework.Shape;
+public class Human implements IPlayer {
 
-public class Human implements IPlayer{
-
-	Scanner sc;
 	private Color c = null;
 	
 	@Override
 	public Action getAction(ArrayList<Shape> al) {
-		sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();
 		System.out.println("Rotate clockwise.");

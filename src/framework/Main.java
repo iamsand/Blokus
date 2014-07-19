@@ -5,7 +5,7 @@ import Players.*;
 public class Main {
 
 	// Change arguments here.
-	static IPlayer[]	players	= { new Human(), new Human(), new Human(), new Human() };
+	static IPlayer[]	players	= { new HumanConsolePlayer(), new HumanConsolePlayer(), new HumanConsolePlayer(), new HumanConsolePlayer() };
 
 	//
 

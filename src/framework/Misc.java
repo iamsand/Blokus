@@ -40,6 +40,11 @@ public class Misc {
         { {0,0},{-1,0},{0,1},{1,0},{2,0} },
     };
 	
+	// G R
+	// B Y 
+	public static final Color[]		PLAY_SEQUENCE	= 
+		{ Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN };
+	
 	// The starting corners for each color.
 	public static int[] startCoord(Color c){
 		switch (c){
@@ -52,7 +57,6 @@ public class Misc {
 		case GREEN:
 			return new int[] {0,19};
 		default:
-			// TODO maybe there is a better way of doing this
 			System.out.println("Tried to get startCoord of Null!");
 			System.exit(0);
 			return null; 

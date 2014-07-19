@@ -13,13 +13,25 @@ public class Hand {
 
     public Hand(Color c) {
         this.c = c;
-        this.hand = new ArrayList();
+        this.hand = new ArrayList<Shape>();
         
         for (int[][] pieceData : Misc.mono) { this.hand.add(new Shape(pieceData)); }
         for (int[][] pieceData : Misc.domi) { this.hand.add(new Shape(pieceData)); }
         for (int[][] pieceData : Misc.trom) { this.hand.add(new Shape(pieceData)); }
         for (int[][] pieceData : Misc.tetr) { this.hand.add(new Shape(pieceData)); }
         for (int[][] pieceData : Misc.pent) { this.hand.add(new Shape(pieceData)); }
+    }
+    
+    public int getNumPieces(){
+    	return hand.size();
+    }
+    
+    public int getScore(){
+    	int score = 0;
+    	for (Shape s : hand){
+    		score+= s.getSize();
+    	}
+    	return score;
     }
 
     public void remove(int index) {

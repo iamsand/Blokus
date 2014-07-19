@@ -8,9 +8,7 @@ public class Board {
 	public static final int				WIDTH_STANDARD	= 20;
 	public static final int				HEIGHT_STANDARD	= 20;
 
-	// Y R
-	// B G 
-	private static final Color[]		PLAY_SEQUENCE	= { Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN };
+	
 
 	private final Color[][]				b;
 	private final LinkedList<Action>	actions;
@@ -25,7 +23,7 @@ public class Board {
 	}
 
 	private Color getColorToPlay() {
-		return Board.PLAY_SEQUENCE[this.actions.size() % 4];
+		return Misc.PLAY_SEQUENCE[this.actions.size() % 4];
 	}
 
 	public boolean isActionLegal(Action action) {
@@ -35,7 +33,7 @@ public class Board {
 
 		int[][] cords = action.shape.getCoordinates();
 
-		// Boundary check
+		// verify the piece doesn't go off the board.
 		for (int i = 0; i < cords.length; i++) {
 			int newX = action.x + cords[i][0];
 			int newY = action.y + cords[i][1];
@@ -44,7 +42,7 @@ public class Board {
 		}
 
 		// verify that the starting piece touches the correct corner.
-		if (this.actions.size() < PLAY_SEQUENCE.length) {
+		if (this.actions.size() < Misc.PLAY_SEQUENCE.length) {
 			int[] corner = Misc.startCoord(action.color);
 			for (int i = 0; i < cords.length; i++) {
 				int newX = action.x + cords[i][0];
@@ -78,13 +76,14 @@ public class Board {
 	 * @return <tt>true</tt> if the action was played successfully
 	 */
 	public boolean doAction(Action action) {
-		if (!isActionLegal(action)) {
-			return false;
-		}
+		// TODO: uncomment this once done.
+//		if (!isActionLegal(action)) {
+//			return false;
+//		}
 
 		int[][] coordinates = action.shape.getCoordinates();
 		for (int[] coordinate : coordinates) {
-			this.b[action.y - coordinate[1]][action.x + coordinate[0]] = action.color;
+			this.b[19-action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
 		}
 
 		this.actions.add(action);
@@ -92,16 +91,6 @@ public class Board {
 		return true;
 	}
 
-	public void conPrint() {
-		for (Color[] row : this.b) {
-			for (Color c : row) {
-				System.out.print("[" + c + "] ");
-			}
-
-			System.out.println();
-		}
-		System.out.println();
-	}
 
 	public String toConsoleMiniString() {
 		StringBuilder sb = new StringBuilder();

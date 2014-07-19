@@ -152,4 +152,22 @@ public class Board {
 		return sb.toString();
 	}
     
+    public class PlayerView {
+        
+        public Color getColor(int x, int y) {
+            return Board.this.b[Board.this.b.length - 1 - y][x];
+        }
+        
+        public Color[][] getFullBoard() {
+            Color[][] r = new Color[Board.this.b.length][];
+            
+            for (int i = 0; i < r.length; i++) {
+                r[i] = Arrays.copyOf(Board.this.b[i], Board.this.b[i].length);
+            }
+            
+            return r;
+        }
+        
+    }
+    
 }

@@ -7,12 +7,9 @@ import java.util.ArrayList;
  */
 public class Hand {
 
-    private Color c;  // <-- is this necessary? seems like Color is bound to a player, not the player's hand
-    
     private final ArrayList<Shape> hand;
 
-    public Hand(Color c) {
-        this.c = c;
+    public Hand() {
         this.hand = new ArrayList<Shape>();
         
         for (int[][] pieceData : Misc.mono) { this.hand.add(new Shape(pieceData)); }
@@ -22,21 +19,21 @@ public class Hand {
         for (int[][] pieceData : Misc.pent) { this.hand.add(new Shape(pieceData)); }
     }
     
-    public int getNumPieces(){
-    	return hand.size();
+    public int getNumPieces() {
+    	return this.hand.size();
     }
     
-    public int getScore(){
+    public int getScore() {
     	int score = 0;
-    	for (Shape s : hand){
-    		score+= s.getSize();
+    	for (Shape s : this.hand) {
+    		score += s.getSize();
     	}
     	return score;
     }
 
     public void remove(int index) {
         try {
-            hand.remove(index);
+            this.hand.remove(index);
         } catch (IndexOutOfBoundsException ex) {}
     }
     

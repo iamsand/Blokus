@@ -40,9 +40,4 @@ public class Misc {
         { {0,0},{-1,0},{0,1},{1,0},{2,0} },
     };
 	
-	// G R
-	// B Y 
-	public static final Color[]		PLAY_SEQUENCE	= 
-		{ Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN };
-    
 }

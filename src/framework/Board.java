@@ -30,6 +30,20 @@ public class Board {
         
         return false;
     }
+    
+    private static final int[][] CORNER_OFFSET = {
+        { -1,  1 },
+        {  1,  1 },
+        {  1, -1 },
+        { -1, -1 }
+    };
+    
+    private static final int[][] EDGE_OFFSET = {
+        { -1,  0 },
+        {  0,  1 },
+        {  1,  0 },
+        {  0, -1 }
+    };
 
 	public boolean isActionValid(Action action) {
 		int[][] coordinates = action.shape.getCoordinates();
@@ -38,23 +52,55 @@ public class Board {
 		for (int i = 0; i < coordinates.length; i++) {
 			int newX = action.x + coordinates[i][0];
 			int newY = action.y + coordinates[i][1];
-			if (newX >= 20 || newX < 0 || newY >= 20 || newY < 0)
+			if (!isOnBoard(newX, newY))
 				return false;
 		}
+        
+        boolean cornerConnected = false;
         
         for (int[] coordinate : coordinates) {
             int newX = action.x + coordinate[0];
             int newY = action.y + coordinate[1];
-            if (b[newX][newY] != Color.NULL)
+            
+            // verify that the piece does not overlap an existing piece
+            if (this.b[newX][newY] != Color.NULL)
                 return false;
+            
+            // verify that piece is not adjacent to pieces of the same color
+            for (int[] offset : Board.EDGE_OFFSET) {
+                int edgeX = newX + offset[0];
+                int edgeY = newY + offset[1];
+                
+                if (isOnBoard(edgeX, edgeY) && this.b[this.b.length - 1 - edgeY][edgeX] == action.color)
+                    return false;
+            }
+            
+            // verify that one corner of the piece touches the corner of a piece of the same color
+            if (!cornerConnected) {
+                for (int i = 0; i < Board.CORNER_OFFSET.length && !cornerConnected; i++) {
+                    int[] offset = Board.CORNER_OFFSET[i];
+                    
+                    int cornerX = newX + offset[0];
+                    int cornerY = newY + offset[1];
+                    
+                    if (isOnBoard(cornerX, cornerY) && this.b[this.b.length - 1 - cornerY][cornerX] == action.color)
+                        cornerConnected = true;
+                }
+            }
         }
 
-		// TODO: verify that piece is not adjacent to pieces of the same color
-
-		// TODO: verify that one corner of the piece touches the corner of a piece of the same color
-
-		return true;
+        return cornerConnected;
 	}
+    
+    /**
+     * 
+     * @param x
+     * @param y
+     * @return <tt>true</tt> if the specified (x, y) pair is a valid coordinate pair for this board
+     */
+    private boolean isOnBoard(int x, int y) {
+        return x < this.b[0].length && x >= 0 && y < this.b.length && y >= 0;
+    }
 	
     // The starting corners for each color.
     private int[] startingCoordinate(Color color) {

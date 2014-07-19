@@ -16,7 +16,7 @@ public class Tester {
 		s = new Shape(Misc.tetr[2]);
 		b.doAction(new Action(s, Color.BLUE, 3, 3));
 		System.out.println(b.toConsoleMiniString());
-		s = s.reflect();
+		s = s.reflectHorizontal();
 		b.doAction(new Action(s, Color.BLUE, 10, 10));
 		System.out.println(b.toConsoleMiniString());
 	}

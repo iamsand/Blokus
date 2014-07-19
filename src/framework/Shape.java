@@ -33,12 +33,12 @@ public final class Shape {
 		return coords.length;
 	}
 	
-	public Shape reflect(){
+	public Shape reflectHorizontal() {
 		int[][] r = new int[coords.length][2];
 		for (int i = 0; i < r.length; i++) {
 			// (x,y) --> (-x,y)
-			r[i][0] = -coords[i][0];
-			r[i][1] = coords[i][1];
+			r[i][0] = -this.coords[i][0];
+			r[i][1] =  this.coords[i][1];
 		}
 		return new Shape(r);
 	}
@@ -74,13 +74,13 @@ public final class Shape {
 		StringBuilder sb = new StringBuilder();
 		for (boolean[] row : map) {
 			for (boolean b : row) {
-				if (b)
-					sb.append("[X]");
-				else
-					sb.append("[ ]");
+                sb.append('[');
+                sb.append(b ? 'X' : ' ');
+                sb.append(']');
 			}
 			sb.append('\n');
 		}
 		return sb.toString();
 	}
+    
 }

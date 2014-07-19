@@ -40,9 +40,9 @@ public class Game {
 				System.out.println("Turn " + turnIndex);
 				System.out.println(b.toConsoleMiniString());
 				do {
-					action = currentPlayer.getAction(hands[turnIndex % this.numPlayers].view());
+					action = currentPlayer.getAction(this.hands[turnIndex % this.numPlayers].view());
 				} while (action.color != this.getColorToPlay()
-						|| hands[turnIndex % this.numPlayers].view().contains(action.shape)
+						|| this.hands[turnIndex % this.numPlayers].view().contains(action.shape)
 						|| !(this.actions.size() < this.numPlayers ? this.b.isFirstActionValid(action) : this.b.isActionValid(action)));
 
 				this.b.doAction(action);

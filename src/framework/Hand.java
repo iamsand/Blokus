@@ -1,6 +1,8 @@
 package framework;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This represents the shapes a player possesses.
@@ -21,17 +23,14 @@ public class Hand {
         for (int[][] pieceData : Misc.pent) { ad(pieceData); }
     }
     
-    public void ad(int[][] pieceData){
+    public void ad(int[][] pieceData) {
     	hand.add(new Shape(pieceNames[nameIndex], pieceData));
     	nameIndex++;
     }
     
     // We could also make "hand" public and just have Game pass copies of hand to IPlayers.
-    public ArrayList<Shape> view() {
-    	// This is okay because shapes are immutable. 
-    	ArrayList<Shape> copy = new ArrayList<Shape>();
-    	copy.addAll(hand);
-    	return copy;
+    public List<Shape> view() {
+    	return Collections.unmodifiableList(this.hand);
     }
     
     public int getNumPieces() {

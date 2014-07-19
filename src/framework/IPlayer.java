@@ -1,6 +1,6 @@
 package framework;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IPlayer {
 	
@@ -8,6 +8,6 @@ public interface IPlayer {
 	
 	Color getColor();
 	
-	Action getAction(ArrayList<Shape> al);
+	Action getAction(List<Shape> hand);
 
 }

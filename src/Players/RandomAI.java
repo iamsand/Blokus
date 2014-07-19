@@ -1,12 +1,12 @@
 package Players;
 
 import framework.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class RandomAI implements IPlayer{
 
 	@Override
-	public Action getAction(ArrayList<Shape> al) {
+	public Action getAction(List<Shape> hand) {
 		// TODO Auto-generated method stub
 		return null;
 	}

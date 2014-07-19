@@ -1,7 +1,7 @@
 package Players;
 
 import framework.*;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Human implements IPlayer {
@@ -9,7 +9,7 @@ public class Human implements IPlayer {
 	private Color c = null;
 	
 	@Override
-	public Action getAction(ArrayList<Shape> al) {
+	public Action getAction(List<Shape> hand) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();
@@ -23,7 +23,7 @@ public class Human implements IPlayer {
 		int y = sc.nextInt();
 		sc.close();
 		
-		Shape s = al.get(i);
+		Shape s = hand.get(i);
 		s = s.rotateCW(rot);
 		if (ref == 1)
 			s.reflectHorizontal();

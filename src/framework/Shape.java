@@ -30,19 +30,19 @@ public final class Shape {
         return c;
     }
     
-    public Shape rotateCW(int n) {
-        return new Shape(Shape.rotateCW(coords, n));
+    public Shape rotateCCW(int n) {
+        return new Shape(Shape.rotateCCW(coords, n));
     }
     
-    private static int[][] rotateCW(int[][] a, int n) {
+    private static int[][] rotateCCW(int[][] a, int n) {
         if (n < 1) {
             return a;
         }
         
-        return Shape.rotateCW(Shape.rotateCW(a), n % 4 - 1);
+        return Shape.rotateCCW(Shape.rotateCCW(a), n % 4 - 1);
     }
 
-    private static int[][] rotateCW(int[][] rotateme) {
+    private static int[][] rotateCCW(int[][] rotateme) {
         int[][] r = new int[rotateme.length][2];
         for (int i = 0; i < r.length; i++) {
             // (x,y) --> (y,-x)
@@ -64,9 +64,9 @@ public final class Shape {
         for (boolean[] row : map) {
             for (boolean b : row) {
                 if (b) {
-                    sb.append('X');
+                    sb.append("[X]");
                 } else {
-                    sb.append('.');
+                    sb.append("[ ]");
                 }
             }
             sb.append('\n');

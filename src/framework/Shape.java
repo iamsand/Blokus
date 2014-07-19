@@ -30,7 +30,7 @@ public final class Shape implements Comparable<Shape> {
 	}
 	
 	public int getSize() {
-		return coords.length;
+		return this.coords.length;
 	}
 	
 	public Shape reflectHorizontal() {
@@ -70,9 +70,7 @@ public final class Shape implements Comparable<Shape> {
 	
 	@Override
 	public int compareTo(Shape s) {
-		if (this.name==s.name)
-			return 1;
-		return 0;
+		return this.name.ordinal() - s.name.ordinal();
 	}
 
 	public ArrayList<Shape> getAllPermutations() {

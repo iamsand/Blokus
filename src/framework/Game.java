@@ -25,6 +25,7 @@ public class Game {
 		this.hands = new Hand[this.numPlayers];
 		for (int i = 0; i < this.numPlayers; i++) {
 			this.hands[i] = new Hand();
+			players[i].startGame(b, PLAY_SEQUENCE[i]);
         }
         this.actions = new LinkedList();
 	}
@@ -36,15 +37,16 @@ public class Game {
             
             Action action;
 			if (hasValidMove()) {
+				System.out.println("Turn " + turnIndex);
+				System.out.println(b.toConsoleMiniString());
 				do {
-					action = currentPlayer.getAction();
+					action = currentPlayer.getAction(hands[turnIndex%this.numPlayers].view());
 				} while (action.color != this.getColorToPlay()
 						|| Arrays.asList(hands[turnIndex%this.numPlayers].view()).contains(action.shape)
 						|| !(this.actions.size() < this.numPlayers ? this.b.isFirstActionValid(action) : this.b.isActionValid(action)));
 
 				this.b.doAction(action);
 				this.actions.add(action);
-
 				pass = 0;
 			}
             else{
@@ -59,8 +61,8 @@ public class Game {
 	// This is easily modified to get all legal moves.
 	private boolean hasValidMove(){
 		Color co = getColorToPlay();
-		for (int i = 0; i < hands[i].getNumPieces();i++){
-			ArrayList<Shape> perms = hands[i].get(i).getAllPermutations();
+		for (int i = 0; i < hands[turnIndex %4].getNumPieces();i++){
+			ArrayList<Shape> perms = hands[turnIndex %4].get(i).getAllPermutations();
 			for (int j = 0; j< perms.size();j++){
 				for (int r = 0; r<Board.HEIGHT_STANDARD;r++){
 					for (int c = 0; c<Board.WIDTH_STANDARD;c++){

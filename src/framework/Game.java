@@ -1,7 +1,6 @@
 package framework;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Game {
@@ -25,7 +24,7 @@ public class Game {
 		this.hands = new Hand[this.numPlayers];
 		for (int i = 0; i < this.numPlayers; i++) {
 			this.hands[i] = new Hand();
-			players[i].startGame(b, PLAY_SEQUENCE[i]);
+            this.players[i].startGame(Board.WIDTH_STANDARD, Board.HEIGHT_STANDARD, this.numPlayers, Game.PLAY_SEQUENCE[i]);
         }
         this.actions = new LinkedList();
 	}
@@ -40,7 +39,7 @@ public class Game {
 				System.out.println("Turn " + turnIndex);
 				System.out.println(b.toConsoleMiniString());
 				do {
-					action = currentPlayer.getAction(this.hands[turnIndex % this.numPlayers].view());
+					action = currentPlayer.getAction(this.b, this.hands[turnIndex % this.numPlayers].view());
 				} while (action.color != this.getColorToPlay()
 						|| this.hands[turnIndex % this.numPlayers].view().contains(action.shape)
 						|| !(this.actions.size() < this.numPlayers ? this.b.isFirstActionValid(action) : this.b.isActionValid(action)));

@@ -3,24 +3,14 @@ package Players;
 import framework.*;
 import java.util.List;
 
-public class RandomAI implements IPlayer{
+public class RandomAI implements IPlayer {
 
-	@Override
-	public Action getAction(List<Shape> hand) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void startGame(int boardWidth, int boardHeight, int numPlayers, Color color) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	@Override
-	public void startGame(Board b, Color c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Action getAction(Board board, List<Shape> hand) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

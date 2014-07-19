@@ -4,10 +4,8 @@ import java.util.List;
 
 public interface IPlayer {
 	
-	void startGame(Board b, Color c);
+	void startGame(int boardWidth, int boardHeight, int numPlayers, Color color);
 	
-	Color getColor();
-	
-	Action getAction(List<Shape> hand);
+	Action getAction(Board board, List<Shape> hand);
 
 }

@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Human implements IPlayer {
 
-	private Color c = null;
+	private Color color = null;
 	
 	@Override
-	public Action getAction(List<Shape> hand) {
+	public Action getAction(Board board, List<Shape> hand) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();
@@ -27,19 +27,11 @@ public class Human implements IPlayer {
 		s = s.rotateCW(rot);
 		if (ref == 1)
 			s.reflectHorizontal();
-		return new Action(s, c, x,y);
+		return new Action(s, this.color, x,y);
 	}
 
 	@Override
-	public void startGame(Board b, Color c) {
-		this.c = c;
-		
+	public void startGame(int boardWidth, int boardHeight, int numPlayers, Color color) {
+		this.color = color;
 	}
-
-	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -10,22 +10,14 @@ import java.util.List;
 public class Hand {
 
     private final ArrayList<Shape> hand;
-    private int nameIndex;
-    private final PieceName[] pieceNames = PieceName.values();
 
     public Hand() {
         this.hand = new ArrayList<Shape>();
-        nameIndex = 0;
-        for (int[][] pieceData : Misc.mono) { ad(pieceData); }
-        for (int[][] pieceData : Misc.domi) { ad(pieceData); }
-        for (int[][] pieceData : Misc.trom) { ad(pieceData); }
-        for (int[][] pieceData : Misc.tetr) { ad(pieceData); }
-        for (int[][] pieceData : Misc.pent) { ad(pieceData); }
-    }
-    
-    public void ad(int[][] pieceData) {
-    	hand.add(new Shape(pieceNames[nameIndex], pieceData));
-    	nameIndex++;
+        
+        PieceName[] pieces = PieceName.values();
+        for (PieceName name : pieces) {
+            this.hand.add(Shape.createShape(name));
+        }
     }
     
     // We could also make "hand" public and just have Game pass copies of hand to IPlayers.
@@ -45,7 +37,7 @@ public class Hand {
     	return score;
     }
     
-    public Shape get(int index){
+    public Shape get(int index) {
     	try {
             return this.hand.get(index);
         } catch (IndexOutOfBoundsException ex) {

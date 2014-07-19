@@ -13,13 +13,21 @@ public final class Shape implements Comparable<Shape> {
 	// [coordinate index][1] -> y
 	private final int[][]	coords;
 
-	public Shape(PieceName name, int[][] coords) {
+	private Shape(PieceName name, int[][] coords) {
 		this.name = name;
 		this.coords = new int[coords.length][];
 		for (int i = 0; i < coords.length; i++) {
 			this.coords[i] = Arrays.copyOf(coords[i], 2);
 		}
 	}
+    
+    public static Shape createShape(PieceName name) {
+        if (name == null) {
+            return null;
+        }
+        
+        return new Shape(name, Shape.PIECE_DATA[name.ordinal()]);
+    }
 
 	public int[][] getCoordinates() {
 		int[][] c = new int[this.coords.length][2];
@@ -105,5 +113,29 @@ public final class Shape implements Comparable<Shape> {
 		}
 		return sb.toString();
 	}
+    
+    private static final int[][][] PIECE_DATA = new int[][][] {
+        {{0, 0}},
+        {{0, 0}, {1, 0}},
+        {{0, 0}, {0, -1}, {-1, 0}},
+        {{0, 0}, {1, 0}, {-1, 0}},
+        {{0, 0}, {1, 0}, {1, 1}, {0, 1}},
+        {{0, 0}, {1, 0}, {-1, 0}, {0, 1}},
+        {{-1, 0}, {0, 0}, {1, 0}, {1, 1}},
+        {{0, 0}, {1, 0}, {2, 0}, {-1, 0}},
+        {{0, 0}, {-1, 0}, {0, 1}, {1, 1}},
+        {{0, 0}, {0, 1}, {1, 0}, {2, 0}, {3, 0}},
+        {{0, 0}, {-1, 0}, {1, 0}, {0, 1}, {0, 2}},
+        {{0, 0}, {0, 1}, {0, 2}, {1, 0}, {2, 0}},
+        {{0, 0}, {1, 0}, {1, 1}, {2, 1}, {3, 1}},
+        {{0, 0}, {0, 1}, {1, 1}, {2, 1}, {2, 2}},
+        {{0, 0}, {0, -1}, {0, -2}, {0, 1}, {0, 2}},
+        {{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 1}},
+        {{0, 0}, {0, 1}, {1, 1}, {1, 2}, {2, 2}},
+        {{0, 0}, {1, 0}, {0, 1}, {0, 2}, {1, 2}},
+        {{0, 0}, {0, -1}, {-1, 0}, {0, 1}, {1, 1}},
+        {{0, 0}, {0, 1}, {1, 0}, {0, -1}, {-1, 0}},
+        {{0, 0}, {-1, 0}, {0, 1}, {1, 0}, {2, 0}}
+    };
     
 }

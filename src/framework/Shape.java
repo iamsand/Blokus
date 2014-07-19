@@ -1,17 +1,20 @@
 package framework;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * This class represents a game piece shape. Shape objects are immutable.
  */
-public final class Shape {
+public final class Shape implements Comparable<Shape>{
 
+	private final PieceName name;
 	// [coordinate index][0] -> x
 	// [coordinate index][1] -> y
 	private final int[][]	coords;
 
-	public Shape(int[][] coords) {
+	public Shape(PieceName name,int[][] coords) {
+		this.name = name;
 		this.coords = new int[coords.length][];
 		for (int i = 0; i < coords.length; i++) {
 			this.coords[i] = Arrays.copyOf(coords[i], 2);
@@ -19,13 +22,10 @@ public final class Shape {
 	}
 
 	public int[][] getCoordinates() {
-		// necessary to return a deep copy because arrays are not read-only
 		int[][] c = new int[this.coords.length][2];
-
 		for (int i = 0; i < c.length; i++) {
 			c[i] = Arrays.copyOf(this.coords[i], 2);
 		}
-
 		return c;
 	}
 	
@@ -40,11 +40,11 @@ public final class Shape {
 			r[i][0] = -this.coords[i][0];
 			r[i][1] =  this.coords[i][1];
 		}
-		return new Shape(r);
+		return new Shape(this.name,r);
 	}
 	
 	public Shape rotateCW(int n) {
-		return new Shape(Shape.rotateCW(coords, n));
+		return new Shape(this.name,Shape.rotateCW(coords, n));
 	}
 
 	private static int[][] rotateCW(int[][] a, int n) {
@@ -62,7 +62,27 @@ public final class Shape {
 		}
 		return r;
 	}
+	
+	@Override
+	public int compareTo(Shape s){
+		if (this.name==s.name)
+			return 1;
+		return 0;
+	}
 
+	public ArrayList<Shape> getAllPermutations(){
+		ArrayList<Shape> perms = new ArrayList<Shape>();
+		perms.add(this);
+		for (int i = 0; i<3;i++){
+			perms.add(perms.get(perms.size()-1).rotateCW(1));
+		}
+		perms.add(this.reflectHorizontal());
+		for (int i = 0; i<3;i++){
+			perms.add(perms.get(perms.size()-1).rotateCW(1));
+		}
+		return perms;
+	}
+	
 	public String toConsoleString() {
 		// all pieces should fit in a 5x5 grid
 		boolean[][] map = new boolean[5][5];

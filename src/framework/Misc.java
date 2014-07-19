@@ -44,23 +44,5 @@ public class Misc {
 	// B Y 
 	public static final Color[]		PLAY_SEQUENCE	= 
 		{ Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN };
-	
-	// The starting corners for each color.
-	public static int[] startCoord(Color c){
-		switch (c){
-		case BLUE:
-			return new int[] {0,0};
-		case YELLOW:
-			return new int[] {19,0};
-		case RED:
-			return new int[] {19,19};
-		case GREEN:
-			return new int[] {0,19};
-		default:
-			System.out.println("Tried to get startCoord of Null!");
-			System.exit(0);
-			return null; 
-			
-		}
-	}
+    
 }

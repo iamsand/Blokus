@@ -43,7 +43,7 @@ public class Board {
 
 		// verify that the starting piece touches the correct corner.
 		if (this.actions.size() < Misc.PLAY_SEQUENCE.length) {
-			int[] corner = Misc.startCoord(action.color);
+			int[] corner = this.startingCoordinate(action.color);
 			for (int i = 0; i < cords.length; i++) {
 				int newX = action.x + cords[i][0];
 				int newY = action.y + cords[i][1];
@@ -68,6 +68,22 @@ public class Board {
 
 		return true;
 	}
+	
+    // The starting corners for each color.
+    private int[] startingCoordinate(Color color) {
+        switch (color) {
+            case BLUE:
+                return new int[] { 0, 0 };
+            case YELLOW:
+                return new int[] { this.b[0].length - 1, 0 };
+            case RED:
+                return new int[] { this.b[0].length - 1, this.b.length - 1 };
+            case GREEN:
+                return new int[] { 0, this.b.length - 1 };
+            default:
+                throw new IllegalArgumentException("color cannot be null");
+        }
+    }
 
 	/**
 	 * Plays an action.

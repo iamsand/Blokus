@@ -9,7 +9,7 @@ public class RandomAI implements IPlayer {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Action getAction(Board board, List<Shape> hand) {
+    public Action getAction(Board.PlayerView board, List<Shape> hand) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

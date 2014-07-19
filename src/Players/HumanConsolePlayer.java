@@ -4,12 +4,12 @@ import framework.*;
 import java.util.List;
 import java.util.Scanner;
 
-public class Human implements IPlayer {
+public class HumanConsolePlayer implements IPlayer {
 
 	private Color color = null;
 	
 	@Override
-	public Action getAction(Board board, List<Shape> hand) {
+	public Action getAction(Board.PlayerView board, List<Shape> hand) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();

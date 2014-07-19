@@ -26,4 +26,9 @@ public final class Action {
         this.y = y;
     }
     
+    @Override
+    public String toString(){
+    	return "[" + shape.toString() + " " + color + " (" + x + ", " + y + ")" + "]";
+    }
+    
 }

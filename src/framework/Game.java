@@ -50,9 +50,10 @@ public class Game {
 				pass = 0;
 			}
             else{
-            	turnIndex++;
             	pass++;
             }
+			turnIndex++;
+			
         }
 	}
 
@@ -60,6 +61,7 @@ public class Game {
 	// This method does not update turnIndex. This will be done in the main game loop.
 	// This is easily modified to get all legal moves.
 	private boolean hasValidMove(){
+		// System.out.println("Call to isValid");
 		Color co = getColorToPlay();
 		for (int i = 0; i < hands[turnIndex %4].getNumPieces();i++){
 			ArrayList<Shape> perms = hands[turnIndex %4].get(i).getAllPermutations();
@@ -67,12 +69,16 @@ public class Game {
 				for (int r = 0; r<Board.HEIGHT_STANDARD;r++){
 					for (int c = 0; c<Board.WIDTH_STANDARD;c++){
 						Action tryMe = new Action(perms.get(j), co, r, c);
-						if (b.isActionValid(tryMe))
+						// System.out.println(tryMe);
+						if (b.isActionValid(tryMe)){
+							// System.out.println("true");
 							return true;
+						}
 					}
 				}	
 			}
 		}
+		// System.out.println("false");
 		return false;
 	}
 	

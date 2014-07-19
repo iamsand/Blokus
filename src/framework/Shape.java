@@ -64,6 +64,11 @@ public final class Shape implements Comparable<Shape>{
 	}
 	
 	@Override
+	public String toString(){
+		return name.toString();
+	}
+	
+	@Override
 	public int compareTo(Shape s){
 		if (this.name==s.name)
 			return 1;

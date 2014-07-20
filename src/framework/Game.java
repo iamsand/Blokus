@@ -39,7 +39,7 @@ public class Game {
 			if (hasValidMove()) {
 				System.out.println("Turn " + turnIndex); // DEBUG ST
 				System.out.println(this.getColorToPlay() + "'s turn to play.");
-				System.out.println(b.toConsoleMiniString()); // DEBUG ST
+				System.out.println(b.toConsoleString()); // DEBUG ST
 				boolean firstTry = true; // DEBUG VAR
 				do {
 					if (!firstTry)

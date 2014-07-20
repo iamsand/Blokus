@@ -148,8 +148,7 @@ public class Board {
         }
 	}
 
-
-	public String toConsoleMiniString() {
+	public String toConsoleString() {
 		StringBuilder sb = new StringBuilder();
 		for (Color[] row : this.b) {
 			for (Color c : row) {

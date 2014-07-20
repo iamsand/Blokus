@@ -15,10 +15,10 @@ public class Tester {
 		Board b = new Board();
         Shape.createShape(PieceName.Q2);
 		b.doAction(new Action(s, Color.BLUE, 3, 3));
-		System.out.println(b.toConsoleMiniString());
+		System.out.println(b.toConsoleString());
 		s = s.reflectHorizontal();
 		b.doAction(new Action(s, Color.BLUE, 10, 10));
-		System.out.println(b.toConsoleMiniString());
+		System.out.println(b.toConsoleString());
 	}
 
 }

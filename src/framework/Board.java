@@ -16,21 +16,6 @@ public class Board {
 		}
 	}
     
-    public boolean isFirstActionValid(Action action) {
-        // verify that the starting piece touches the correct corner.
-        int[][] coordinates = action.shape.getCoordinates();
-        int[] corner = this.startingCoordinate(action.color);
-        for (int[] coordinate : coordinates) {
-            int newX = action.x + coordinate[0];
-            int newY = action.y + coordinate[1];
-            if (newX == corner[0] && newY == corner[1]) {
-                return isActionValid(action);
-            }
-        }
-        
-        return false;
-    }
-    
     private static final int[][] CORNER_OFFSET = {
         { -1,  1 },
         {  1,  1 },
@@ -46,6 +31,9 @@ public class Board {
     };
 
 	public boolean isActionValid(Action action) {
+		// System.out.println("testing action: " + action);
+		
+		// System.out.println(1); // DEBUG ST
 		int[][] coordinates = action.shape.getCoordinates();
 
 		// verify the piece doesn't go off the board.
@@ -55,7 +43,27 @@ public class Board {
 			if (!isOnBoard(newX, newY))
 				return false;
 		}
+		// System.out.println(2); // DEBUG ST
+
+		// First action test
+		int[] myCorner = this.startingCoordinate(action.color);
+		// System.out.println("Checking corner for null " + myCorner[0] + " " + myCorner[1]); // DEBUG ST
+		if (b[this.b[0].length-myCorner[1]-1][myCorner[0]] == Color.NULL){
+			// System.out.println("Corner is null. This is first action"); // DEBUG ST
+			int[] corner = this.startingCoordinate(action.color);
+	        for (int[] coordinate : coordinates) {
+	            int newX = action.x + coordinate[0];
+	            int newY = action.y + coordinate[1];
+	            if (newX == corner[0] && newY == corner[1]) {
+	            	// System.out.println("Placement of piece will touch correct corner"); // DEBUG ST
+	                return true;
+	            }
+	        }
+	        // System.out.println("Placement of piece will NOT touch correct corner"); // DEBUG ST
+	        return false;
+		}
         
+		// System.out.println(3); // DEBUG ST
         boolean cornerConnected = false;
         
         for (int[] coordinate : coordinates) {
@@ -88,7 +96,6 @@ public class Board {
                 }
             }
         }
-
         return cornerConnected;
 	}
     
@@ -102,17 +109,18 @@ public class Board {
         return x < this.b[0].length && x >= 0 && y < this.b.length && y >= 0;
     }
 	
+    
     // The starting corners for each color.
     private int[] startingCoordinate(Color color) {
         switch (color) {
             case BLUE:
                 return new int[] { 0, 0 };
             case YELLOW:
-                return new int[] { this.b[0].length - 1, 0 };
+                return new int[] { 0, this.b.length - 1 };
             case RED:
                 return new int[] { this.b[0].length - 1, this.b.length - 1 };
             case GREEN:
-                return new int[] { 0, this.b.length - 1 };
+                return new int[] { this.b[0].length - 1, 0};
             default:
                 throw new IllegalArgumentException("color cannot be null");
         }
@@ -121,21 +129,15 @@ public class Board {
 	/**
 	 * Plays an action.
 	 * 
-	 * @param action The action to be played on the board.
+	 * @param action The action to be played on the board. The action must be valid.
 	 * @return <tt>true</tt> if the action was played successfully
 	 */
-	public boolean doAction(Action action) {
-		// TODO: uncomment this once done.
-//		if (!isActionLegal(action)) {
-//			return false;
-//		}
+	public void doAction(Action action) {
 
         int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
             this.b[this.b.length - 1 - action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
         }
-
-		return true;
 	}
 
 

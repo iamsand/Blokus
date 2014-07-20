@@ -8,25 +8,27 @@ public class HumanConsolePlayer implements IPlayer {
 
 	private Color color = null;
 	
+	private static Scanner sc = new Scanner(System.in);
+	
 	@Override
 	public Action getAction(Board.PlayerView board, List<Shape> hand) {
-		Scanner sc = new Scanner(System.in);
+		System.out.println("Begin console input."); // DEBUG ST
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();
 		System.out.println("Rotate clockwise.");
-		int rot = sc.nextInt()%4;
+		int rot = sc.nextInt();
 		System.out.println("Reflect. [1(y)/0(n)]");
 		int ref = sc.nextInt();
 		System.out.println("x");
 		int x = sc.nextInt();
 		System.out.println("y");
 		int y = sc.nextInt();
-		sc.close();
+		System.out.println("End console input"); // DEBUG ST
 		
 		Shape s = hand.get(i);
-		s = s.rotateCW(rot);
+		s = s.rotateCW(rot%4);
 		if (ref == 1)
-			s.reflectHorizontal();
+			s = s.reflectHorizontal();
 		return new Action(s, this.color, x,y);
 	}
 

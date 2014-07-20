@@ -1,6 +1,7 @@
 package framework;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Game {
@@ -32,17 +33,23 @@ public class Game {
 	public void run() {
 		int pass = 0;
         while (pass < this.numPlayers) {
-            IPlayer currentPlayer = this.players[turnIndex % this.numPlayers];
+            IPlayer currentPlayer = this.players[turnIndex % this.numPlayers]; 
+            
             
             Action action;
 			if (hasValidMove()) {
-				System.out.println("Turn " + turnIndex);
-				System.out.println(b.toConsoleMiniString());
+				System.out.println("Turn " + turnIndex); // DEBUG ST
+				System.out.println(this.getColorToPlay() + "'s turn to play.");
+				System.out.println(b.toConsoleMiniString()); // DEBUG ST
+				boolean firstTry = true; // DEBUG VAR
 				do {
+					if (!firstTry)
+						System.out.println("Invalid move!");
 					action = currentPlayer.getAction(this.b.new PlayerView(), this.hands[turnIndex % this.numPlayers].view());
+					firstTry = false;
 				} while (action.color != this.getColorToPlay()
 						|| this.hands[turnIndex % this.numPlayers].view().contains(action.shape)
-						|| !(this.actions.size() < this.numPlayers ? this.b.isFirstActionValid(action) : this.b.isActionValid(action)));
+						|| !(this.b.isActionValid(action)));
 
 				this.b.doAction(action);
 				this.actions.add(action);
@@ -55,28 +62,25 @@ public class Game {
         }
 	}
 
-	// This is intended for the current player only.
-	// This method does not update turnIndex. This will be done in the main game loop.
-	// This is easily modified to get all legal moves.
 	private boolean hasValidMove() {
-		// System.out.println("Call to isValid");
+		// System.out.println("hasValidMove()..."); // DEBUG ST
 		Color color = getColorToPlay();
-        for (int i = 0; i < hands[turnIndex % 4].getNumPieces(); i++) {
-            ArrayList<Shape> perms = hands[turnIndex % 4].get(i).getAllPermutations();
+		// System.out.println(color);
+        for (int i = 0; i < hands[turnIndex % numPlayers].getNumPieces(); i++) {
+            ArrayList<Shape> perms = hands[turnIndex % numPlayers].get(i).getAllPermutations();
 			for (int j = 0; j< perms.size();j++){
                 for (int r = 0; r < Board.HEIGHT_STANDARD; r++) {
                     for (int c = 0; c < Board.WIDTH_STANDARD; c++) {
                         Action tryMe = new Action(perms.get(j), color, r, c);
-                        // System.out.println(tryMe);
                         if (b.isActionValid(tryMe)) {
-                            // System.out.println("true");
+                        	// System.out.println("Found valid move: " + tryMe); // 
                             return true;
                         }
                     }
                 }
 			}
 		}
-		// System.out.println("false");
+        // System.out.println("No valid move.");
 		return false;
 	}
 	

@@ -24,7 +24,7 @@ public class Game {
 		this.hands = new Hand[this.numPlayers];
 		for (int i = 0; i < this.numPlayers; i++) {
 			this.hands[i] = new Hand();
-            this.players[i].startGame(Board.WIDTH_STANDARD, Board.HEIGHT_STANDARD, this.numPlayers, Game.PLAY_SEQUENCE[i]);
+            this.players[i].startGame(this.b.getWidth(), this.b.getHeight(), this.numPlayers, Game.PLAY_SEQUENCE[i]);
         }
         this.actions = new LinkedList();
 	}
@@ -69,8 +69,8 @@ public class Game {
         for (Shape shape : currentHand) {
             List<Shape> perms = shape.getAllPermutations();
 			for (Shape permutation : perms) {
-                for (int r = 0; r < Board.HEIGHT_STANDARD; r++) {
-                    for (int c = 0; c < Board.WIDTH_STANDARD; c++) {
+                for (int r = 0; r < this.b.getHeight(); r++) {
+                    for (int c = 0; c < this.b.getWidth(); c++) {
                         Action tryMe = new Action(permutation, color, r, c);
                         if (b.isActionValid(tryMe)) {
                         	// System.out.println("Found valid move: " + tryMe);

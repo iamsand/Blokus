@@ -4,17 +4,25 @@ import java.util.Arrays;
 
 public class Board {
 
-	public static final int				WIDTH_STANDARD	= 20;
-	public static final int				HEIGHT_STANDARD	= 20;
+	private static final int WIDTH_STANDARD = 20;
+	private static final int HEIGHT_STANDARD = 20;
 
 	private final Color[][] b;
+    private final int width;
+    private final int height;
     
 	public Board() {
+        this.width = Board.WIDTH_STANDARD;
+        this.height = Board.HEIGHT_STANDARD;
+        
 		this.b = new Color[HEIGHT_STANDARD][WIDTH_STANDARD];
 		for (Color[] row : this.b) {
 			Arrays.fill(row, Color.NULL);
 		}
 	}
+    
+    public int getWidth() { return this.width; }
+    public int getHeight() { return this.height; }
     
     private static final int[][] CORNER_OFFSET = {
         { -1,  1 },
@@ -48,7 +56,7 @@ public class Board {
 		// First action test
 		int[] myCorner = this.startingCoordinate(action.color);
 		// System.out.println("Checking corner for null " + myCorner[0] + " " + myCorner[1]); // DEBUG ST
-		if (b[this.b[0].length-myCorner[1]-1][myCorner[0]] == Color.NULL){
+		if (this.b[this.height - myCorner[1] - 1][myCorner[0]] == Color.NULL){
 			// System.out.println("Corner is null. This is first action"); // DEBUG ST
 			int[] corner = this.startingCoordinate(action.color);
 	        for (int[] coordinate : coordinates) {
@@ -79,7 +87,7 @@ public class Board {
                 int edgeX = newX + offset[0];
                 int edgeY = newY + offset[1];
                 
-                if (isOnBoard(edgeX, edgeY) && this.b[this.b.length - 1 - edgeY][edgeX] == action.color)
+                if (isOnBoard(edgeX, edgeY) && this.b[this.height - 1 - edgeY][edgeX] == action.color)
                     return false;
             }
             
@@ -91,7 +99,7 @@ public class Board {
                     int cornerX = newX + offset[0];
                     int cornerY = newY + offset[1];
                     
-                    if (isOnBoard(cornerX, cornerY) && this.b[this.b.length - 1 - cornerY][cornerX] == action.color)
+                    if (isOnBoard(cornerX, cornerY) && this.b[this.height - 1 - cornerY][cornerX] == action.color)
                         cornerConnected = true;
                 }
             }
@@ -106,7 +114,7 @@ public class Board {
      * @return <tt>true</tt> if the specified (x, y) pair is a valid coordinate pair for this board
      */
     private boolean isOnBoard(int x, int y) {
-        return x < this.b[0].length && x >= 0 && y < this.b.length && y >= 0;
+        return x < this.width && x >= 0 && y < this.height && y >= 0;
     }
 	
     
@@ -116,11 +124,11 @@ public class Board {
             case BLUE:
                 return new int[] { 0, 0 };
             case YELLOW:
-                return new int[] { 0, this.b.length - 1 };
+                return new int[] { 0, this.height - 1 };
             case RED:
-                return new int[] { this.b[0].length - 1, this.b.length - 1 };
+                return new int[] { this.width - 1, this.height - 1 };
             case GREEN:
-                return new int[] { this.b[0].length - 1, 0};
+                return new int[] { this.width - 1, 0};
             default:
                 throw new IllegalArgumentException("color cannot be null");
         }
@@ -136,7 +144,7 @@ public class Board {
 
         int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
-            this.b[this.b.length - 1 - action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
+            this.b[this.height - 1 - action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
         }
 	}
 
@@ -157,14 +165,14 @@ public class Board {
     public class PlayerView {
         
         public Color getColor(int x, int y) {
-            return Board.this.b[Board.this.b.length - 1 - y][x];
+            return Board.this.b[Board.this.height - 1 - y][x];
         }
         
         public Color[][] getFullBoard() {
-            Color[][] r = new Color[Board.this.b.length][];
+            Color[][] r = new Color[Board.this.height][];
             
             for (int i = 0; i < r.length; i++) {
-                r[i] = Arrays.copyOf(Board.this.b[i], Board.this.b[i].length);
+                r[i] = Arrays.copyOf(Board.this.b[i], Board.this.width);
             }
             
             return r;

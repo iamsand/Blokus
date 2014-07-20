@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Board {
 
-	private static final int WIDTH_STANDARD = 20;
+	private static final int  WIDTH_STANDARD = 20;
 	private static final int HEIGHT_STANDARD = 20;
 
 	private final Color[][] b;
@@ -15,7 +15,7 @@ public class Board {
         this.width = Board.WIDTH_STANDARD;
         this.height = Board.HEIGHT_STANDARD;
         
-		this.b = new Color[HEIGHT_STANDARD][WIDTH_STANDARD];
+		this.b = new Color[this.height][this.width];
 		for (Color[] row : this.b) {
 			Arrays.fill(row, Color.NULL);
 		}
@@ -43,15 +43,13 @@ public class Board {
 		
 		// System.out.println(1); // DEBUG ST
 		int[][] coordinates = action.shape.getCoordinates();
-
-		// verify the piece doesn't go off the board.
-		for (int i = 0; i < coordinates.length; i++) {
-			int newX = action.x + coordinates[i][0];
-			int newY = action.y + coordinates[i][1];
-			if (!isOnBoard(newX, newY))
-				return false;
-		}
-		// System.out.println(2); // DEBUG ST
+        for (int[] coordinate : coordinates) {
+            int newX = action.x + coordinate[0];
+            int newY = action.y + coordinate[1];
+            if (!isOnBoard(newX, newY))
+                return false;
+        }
+        // System.out.println(2); // DEBUG ST
 
 		// First action test
 		int[] myCorner = this.startingCoordinate(action.color);

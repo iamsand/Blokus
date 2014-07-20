@@ -26,7 +26,7 @@ public class Game {
 			this.hands[i] = new Hand();
             this.players[i].startGame(this.b.getWidth(), this.b.getHeight(), this.numPlayers, Game.PLAY_SEQUENCE[i]);
         }
-        this.actions = new LinkedList();
+        this.actions = new LinkedList<Action>();
 	}
 
 	public void run() {

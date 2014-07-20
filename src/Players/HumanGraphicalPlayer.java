@@ -17,7 +17,7 @@ public class HumanGraphicalPlayer implements IPlayer {
         JFrame frame = new JFrame("Blokus");
         frame.setContentPane(pane);
         frame.pack();
-        frame.show();
+        frame.setVisible(true);
         
         return pane.getAction();
     }

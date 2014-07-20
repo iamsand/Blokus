@@ -138,10 +138,8 @@ public class Board {
 	 * Plays an action.
 	 * 
 	 * @param action The action to be played on the board. The action must be valid.
-	 * @return <tt>true</tt> if the action was played successfully
 	 */
 	public void doAction(Action action) {
-
         int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
             this.b[this.height - 1 - action.y + coordinate[1]][action.x + coordinate[0]] = action.color;

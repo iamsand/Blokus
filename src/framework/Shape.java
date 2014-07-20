@@ -1,7 +1,8 @@
 package framework;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This class represents a game piece shape. Shape objects are immutable.
@@ -81,15 +82,15 @@ public final class Shape implements Comparable<Shape> {
 		return this.name.ordinal() - s.name.ordinal();
 	}
 
-	public ArrayList<Shape> getAllPermutations() {
-        ArrayList<Shape> perms = new ArrayList<Shape>();
+	public List<Shape> getAllPermutations() {
+        LinkedList<Shape> perms = new LinkedList<Shape>();
         perms.add(this);
         for (int i = 0; i < 3; i++) {
-            perms.add(perms.get(perms.size() - 1).rotateCW(1));
+            perms.add(perms.getLast().rotateCW(1));
         }
         perms.add(this.reflectHorizontal());
         for (int i = 0; i < 3; i++) {
-            perms.add(perms.get(perms.size() - 1).rotateCW(1));
+            perms.add(perms.getLast().rotateCW(1));
         }
         return perms;
 	}

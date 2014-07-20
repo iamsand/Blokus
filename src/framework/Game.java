@@ -1,8 +1,7 @@
 package framework;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
 
@@ -66,14 +65,15 @@ public class Game {
 		// System.out.println("hasValidMove()..."); // DEBUG ST
 		Color color = getColorToPlay();
 		// System.out.println(color);
-        for (int i = 0; i < hands[turnIndex % numPlayers].getNumPieces(); i++) {
-            ArrayList<Shape> perms = hands[turnIndex % numPlayers].get(i).getAllPermutations();
-			for (int j = 0; j< perms.size();j++){
+        List<Shape> currentHand = this.hands[this.turnIndex % this.numPlayers].view();
+        for (Shape shape : currentHand) {
+            List<Shape> perms = shape.getAllPermutations();
+			for (Shape permutation : perms) {
                 for (int r = 0; r < Board.HEIGHT_STANDARD; r++) {
                     for (int c = 0; c < Board.WIDTH_STANDARD; c++) {
-                        Action tryMe = new Action(perms.get(j), color, r, c);
+                        Action tryMe = new Action(permutation, color, r, c);
                         if (b.isActionValid(tryMe)) {
-                        	// System.out.println("Found valid move: " + tryMe); // 
+                        	// System.out.println("Found valid move: " + tryMe);
                             return true;
                         }
                     }

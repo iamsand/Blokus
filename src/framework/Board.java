@@ -173,6 +173,14 @@ public class Board {
             return r;
         }
         
+        public int getWidth() {
+        	return Board.this.getWidth();
+        }
+        
+        public int getHeight() {
+        	return Board.this.getHeight();
+        }
+        
     }
     
 }

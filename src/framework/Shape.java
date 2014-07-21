@@ -42,6 +42,10 @@ public final class Shape implements Comparable<Shape> {
 		return this.coords.length;
 	}
 	
+	public PieceName getName() {
+		return this.name;
+	}
+	
 	public Shape reflectHorizontal() {
 		int[][] r = new int[coords.length][2];
 		for (int i = 0; i < r.length; i++) {

@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 import javax.swing.JFrame;
 
+import application.players.RandomAI;
 import framework.Action;
 import framework.Color;
 import framework.Game;
@@ -20,9 +21,9 @@ public class Main {
 		
 		// ----- Set players. -----
 		players.put(Color.BLUE,   panel.new HumanPlayer());
-		players.put(Color.YELLOW, panel.new HumanPlayer());
-		players.put(Color.RED,    panel.new HumanPlayer());
-		players.put(Color.GREEN,  panel.new HumanPlayer());
+		players.put(Color.YELLOW, new RandomAI(blokus));
+		players.put(Color.RED,    new RandomAI(blokus));
+		players.put(Color.GREEN,  new RandomAI(blokus));
 		// ------------------------
 		
 		JFrame frame = new JFrame("Blokus");

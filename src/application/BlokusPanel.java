@@ -1,13 +1,17 @@
 package application;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import framework.Action;
@@ -26,10 +30,29 @@ public class BlokusPanel extends JPanel {
 	
 	private JLabel[][] grid = null;
 	
+	private final DefaultListModel<PieceName> shapeListModel = new DefaultListModel<PieceName>();
+	private final JList<PieceName> shapeList = new JList<PieceName>(shapeListModel);
+	private final JButton btnRotate = new JButton("CW90");
+	
+	private final JPanel boardPanel = new JPanel();
+	private final JPanel selectionPanel = new JPanel();
+	
+	public BlokusPanel() {
+		this.setLayout(new BorderLayout());
+		
+		this.selectionPanel.setLayout(new BorderLayout());
+		
+		this.selectionPanel.add(this.shapeList, BorderLayout.CENTER);
+		this.selectionPanel.add(this.btnRotate, BorderLayout.PAGE_END);
+		
+		this.add(this.boardPanel, BorderLayout.CENTER);
+		this.add(this.selectionPanel, BorderLayout.LINE_END);
+	}
+	
 	public void updateBoard(PlayerView view) {
 		if (this.grid == null || this.grid.length != view.getHeight() || this.grid[0].length != view.getWidth()) {
-			this.removeAll();
-			this.setLayout(new GridLayout(view.getHeight(), view.getWidth(), BlokusPanel.GAP_SIZE, BlokusPanel.GAP_SIZE));
+			this.boardPanel.removeAll();
+			this.boardPanel.setLayout(new GridLayout(view.getHeight(), view.getWidth(), BlokusPanel.GAP_SIZE, BlokusPanel.GAP_SIZE));
 			this.grid = new JLabel[view.getHeight()][view.getWidth()];
 			for (int i = 0; i < view.getHeight(); i++) {
 				for (int j = 0; j < view.getWidth(); j++) {
@@ -60,7 +83,7 @@ public class BlokusPanel extends JPanel {
 						}
 					});
 					this.grid[i][j] = label;
-					this.add(label);
+					this.boardPanel.add(label);
 				}
 			}
 		}
@@ -84,6 +107,10 @@ public class BlokusPanel extends JPanel {
 	
 	public Action getAction(Color color, List<PieceName> hand) {
 		this.waitingForAction = true;
+		this.shapeListModel.clear();
+		for (PieceName piece : hand) {
+			this.shapeListModel.addElement(piece);
+		}
 		
 		synchronized (this) {
 			while (waitingForAction) {
@@ -96,7 +123,7 @@ public class BlokusPanel extends JPanel {
 		
 		return this.action;
 	}
-
+	
 	public class HumanPlayer implements IPlayer {
 
 		private Color color;

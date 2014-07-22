@@ -54,7 +54,7 @@ public class Board {
 		// First action test
 		int[] myCorner = this.startingCoordinate(action.color);
 		// System.out.println("Checking corner for null " + myCorner[0] + " " + myCorner[1]); // DEBUG ST
-		if (this.b[this.height - myCorner[1] - 1][myCorner[0]] == Color.NULL){
+		if (this.b[myCorner[1]][myCorner[0]] == Color.NULL){
 			// System.out.println("Corner is null. This is first action"); // DEBUG ST
 			int[] corner = this.startingCoordinate(action.color);
 	        for (int[] coordinate : coordinates) {
@@ -85,7 +85,7 @@ public class Board {
                 int edgeX = newX + offset[0];
                 int edgeY = newY + offset[1];
                 
-                if (isOnBoard(edgeX, edgeY) && this.b[this.height - 1 - edgeY][edgeX] == action.color)
+                if (this.isOnBoard(edgeX, edgeY) && this.b[edgeY][edgeX] == action.color)
                     return false;
             }
             
@@ -97,7 +97,7 @@ public class Board {
                     int cornerX = newX + offset[0];
                     int cornerY = newY + offset[1];
                     
-                    if (isOnBoard(cornerX, cornerY) && this.b[this.height - 1 - cornerY][cornerX] == action.color)
+                    if (isOnBoard(cornerX, cornerY) && this.b[cornerY][cornerX] == action.color)
                         cornerConnected = true;
                 }
             }
@@ -120,13 +120,13 @@ public class Board {
     private int[] startingCoordinate(Color color) {
         switch (color) {
             case BLUE:
-                return new int[] { 0, 0 };
-            case YELLOW:
                 return new int[] { 0, this.height - 1 };
+            case YELLOW:
+                return new int[] { 0, 0 };
             case RED:
-                return new int[] { this.width - 1, this.height - 1 };
-            case GREEN:
                 return new int[] { this.width - 1, 0};
+            case GREEN:
+                return new int[] { this.width - 1, this.height - 1 };
             default:
                 throw new IllegalArgumentException("color cannot be null");
         }
@@ -140,7 +140,7 @@ public class Board {
 	public void doAction(Action action) {
         int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
-            this.b[this.height - 1 - (action.y + coordinate[1])][action.x + coordinate[0]] = action.color;
+            this.b[action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
         }
 	}
 
@@ -160,7 +160,7 @@ public class Board {
     public class PlayerView {
         
         public Color getColor(int x, int y) {
-            return Board.this.b[Board.this.height - 1 - y][x];
+            return Board.this.b[y][x];
         }
         
         public Color[][] getFullBoard() {

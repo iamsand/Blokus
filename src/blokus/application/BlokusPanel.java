@@ -131,7 +131,7 @@ public class BlokusPanel extends JPanel {
 								
 								int[][] coordinates = shape.getCoordinates();
 								for (int[] coordinate : coordinates) {
-									int r = cell.row - coordinate[1];
+									int r = cell.row + coordinate[1];
 									int c = cell.column + coordinate[0];
 									
 									if (r >= 0 && r < view.getHeight() && c >= 0 && c < view.getWidth()) {
@@ -141,7 +141,7 @@ public class BlokusPanel extends JPanel {
 									}
 								}
 								
-								BlokusPanel.this.action = new Action(shape, BlokusPanel.this.actionColor, cell.column, view.getHeight() - 1 - cell.row);
+								BlokusPanel.this.action = new Action(shape, BlokusPanel.this.actionColor, cell.column, cell.row);
 							}
 						}
 
@@ -149,7 +149,7 @@ public class BlokusPanel extends JPanel {
 						public void mouseExited(MouseEvent e) {
 							while (!BlokusPanel.this.highlighted.isEmpty()) {
 								BlokusCell highlightedCell = BlokusPanel.this.highlighted.pop();
-								highlightedCell.setBackground(BlokusPanel.this.convertColor(view.getColor(highlightedCell.column, view.getHeight() - 1 - highlightedCell.row)).darker().darker());
+								highlightedCell.setBackground(BlokusPanel.this.convertColor(view.getColor(highlightedCell.column, highlightedCell.row)).darker().darker());
 							}
 						}
 					});
@@ -161,7 +161,7 @@ public class BlokusPanel extends JPanel {
 		
 		for (int i = 0; i < view.getHeight(); i++) {
 			for (int j = 0; j < view.getWidth(); j++) {
-				this.grid[i][j].setBackground(this.convertColor(view.getColor(j, view.getHeight() - 1 - i)).darker().darker());
+				this.grid[i][j].setBackground(this.convertColor(view.getColor(j, i)).darker().darker());
 			}
 		}
 	}

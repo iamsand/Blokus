@@ -140,7 +140,7 @@ public class Board {
 	public void doAction(Action action) {
         int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
-            this.b[this.height - 1 - action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
+            this.b[this.height - 1 - (action.y + coordinate[1])][action.x + coordinate[0]] = action.color;
         }
 	}
 

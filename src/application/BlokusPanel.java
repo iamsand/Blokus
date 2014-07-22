@@ -137,7 +137,7 @@ public class BlokusPanel extends JPanel {
 									if (r >= 0 && r < view.getHeight() && c >= 0 && c < view.getWidth()) {
 										BlokusCell highlightedCell = BlokusPanel.this.grid[r][c];
 										BlokusPanel.this.highlighted.add(highlightedCell);
-										highlightedCell.setBackground(cell.getBackground().brighter().brighter());
+										highlightedCell.setBackground(highlightedCell.getBackground().brighter().brighter());
 									}
 								}
 								

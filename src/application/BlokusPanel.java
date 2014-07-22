@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +18,9 @@ import framework.PieceName;
 
 public class BlokusPanel extends JPanel {
 	
+	private static final int CELL_SIZE = 20;
+	private static final int  GAP_SIZE =  1;
+	
 	private boolean waitingForAction = false;
 	private Action action;
 	
@@ -27,14 +29,13 @@ public class BlokusPanel extends JPanel {
 	public void updateBoard(PlayerView view) {
 		if (this.grid == null || this.grid.length != view.getHeight() || this.grid[0].length != view.getWidth()) {
 			this.removeAll();
-			this.setLayout(new GridLayout(view.getHeight(), view.getWidth()));
+			this.setLayout(new GridLayout(view.getHeight(), view.getWidth(), BlokusPanel.GAP_SIZE, BlokusPanel.GAP_SIZE));
 			this.grid = new JLabel[view.getHeight()][view.getWidth()];
 			for (int i = 0; i < view.getHeight(); i++) {
 				for (int j = 0; j < view.getWidth(); j++) {
 					JLabel label = new JLabel();
-					label.setPreferredSize(new Dimension(20, 20));
+					label.setPreferredSize(new Dimension(BlokusPanel.CELL_SIZE, BlokusPanel.CELL_SIZE));
 					label.setOpaque(true);
-					label.setBorder(BorderFactory.createLineBorder(java.awt.Color.darkGray));
 					label.addMouseListener(new MouseListener() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
@@ -66,18 +67,18 @@ public class BlokusPanel extends JPanel {
 		
 		for (int i = 0; i < view.getHeight(); i++) {
 			for (int j = 0; j < view.getWidth(); j++) {
-				this.grid[i][j].setBackground(BlokusPanel.convertColor(view.getColor(j, view.getHeight() - 1 - i)).darker().darker());
+				this.grid[i][j].setBackground(this.convertColor(view.getColor(j, view.getHeight() - 1 - i)).darker().darker());
 			}
 		}
 	}
 	
-	private static java.awt.Color convertColor(Color color) {
+	private java.awt.Color convertColor(Color color) {
 		switch (color) {
 			case BLUE: return java.awt.Color.blue;
 			case YELLOW: return java.awt.Color.yellow;
 			case RED: return java.awt.Color.red;
 			case GREEN: return java.awt.Color.green;
-			default: return java.awt.Color.darkGray;
+			default: return this.getBackground();
 		}
 	}
 	

@@ -1,8 +1,22 @@
 package blokus.framework;
 
 import java.util.Arrays;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Board {
+	
+	public static final Logger LOGGER = Logger.getLogger(Board.class.getName());
+	{
+		Board.LOGGER.setUseParentHandlers(false);
+		
+		ConsoleHandler handler = new ConsoleHandler();
+		Board.LOGGER.addHandler(handler);
+
+		handler.setLevel(Level.ALL);
+		Board.LOGGER.setLevel(Level.ALL);
+	}
 
 	private static final int  WIDTH_STANDARD = 20;
 	private static final int HEIGHT_STANDARD = 20;
@@ -39,37 +53,37 @@ public class Board {
     };
 
 	public boolean isActionValid(Action action) {
-		// System.out.println("testing action: " + action);
+		Board.LOGGER.fine("Testing action: " + action);
 		
-		// System.out.println(1); // DEBUG ST
 		int[][] coordinates = action.shape.getCoordinates();
         for (int[] coordinate : coordinates) {
             int newX = action.x + coordinate[0];
             int newY = action.y + coordinate[1];
-            if (!isOnBoard(newX, newY))
-                return false;
+			if (!isOnBoard(newX, newY)) {
+				Board.LOGGER.info("Invalid action: oversteps board");
+				return false;
+			}
         }
-        // System.out.println(2); // DEBUG ST
 
 		// First action test
 		int[] myCorner = this.startingCoordinate(action.color);
-		// System.out.println("Checking corner for null " + myCorner[0] + " " + myCorner[1]); // DEBUG ST
-		if (this.b[myCorner[1]][myCorner[0]] == Color.NULL){
-			// System.out.println("Corner is null. This is first action"); // DEBUG ST
+		if (this.b[myCorner[1]][myCorner[0]] == Color.NULL) {
+			Board.LOGGER.fine(action.color.name() + " corner is null, first action");
 			int[] corner = this.startingCoordinate(action.color);
 	        for (int[] coordinate : coordinates) {
 	            int newX = action.x + coordinate[0];
 	            int newY = action.y + coordinate[1];
 	            if (newX == corner[0] && newY == corner[1]) {
-	            	// System.out.println("Placement of piece will touch correct corner"); // DEBUG ST
+					Board.LOGGER.info("Valid action: first " + action.color.name() + " piece touches correct corner");
 	                return true;
 	            }
 	        }
-	        // System.out.println("Placement of piece will NOT touch correct corner"); // DEBUG ST
+			Board.LOGGER.info("Invalid action: first " + action.color.name() + " piece does not touch correct corner");
 	        return false;
+		} else {
+			Board.LOGGER.fine(action.color.name() + " corner is not null");
 		}
-        
-		// System.out.println(3); // DEBUG ST
+
         boolean cornerConnected = false;
         
         for (int[] coordinate : coordinates) {
@@ -77,16 +91,20 @@ public class Board {
             int newY = action.y + coordinate[1];
             
             // verify that the piece does not overlap an existing piece
-            if (this.b[newX][newY] != Color.NULL)
+			if (this.b[newX][newY] != Color.NULL) {
+				Board.LOGGER.info("Invalid action: overlaps existing piece");
                 return false;
+			}
             
             // verify that piece is not adjacent to pieces of the same color
             for (int[] offset : Board.EDGE_OFFSET) {
                 int edgeX = newX + offset[0];
                 int edgeY = newY + offset[1];
                 
-                if (this.isOnBoard(edgeX, edgeY) && this.b[edgeY][edgeX] == action.color)
+				if (this.isOnBoard(edgeX, edgeY) && this.b[edgeY][edgeX] == action.color) {
+					Board.LOGGER.info("Invalid action: adjacent to friendly piece");
                     return false;
+				}
             }
             
             // verify that one corner of the piece touches the corner of a piece of the same color
@@ -102,7 +120,13 @@ public class Board {
                 }
             }
         }
-        return cornerConnected;
+		
+		if (!cornerConnected) {
+			Board.LOGGER.info("Invalid action: does not connect to friendly corner");
+			return false;
+		}
+		
+		return true;
 	}
     
     /**

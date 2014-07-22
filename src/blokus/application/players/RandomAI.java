@@ -1,14 +1,14 @@
-package application.players;
+package blokus.application.players;
 
 import java.util.List;
 import java.util.Random;
 
-import application.IPlayer;
-import framework.Action;
-import framework.Board;
-import framework.Color;
-import framework.Game;
-import framework.PieceName;
+import blokus.application.IPlayer;
+import blokus.framework.Action;
+import blokus.framework.Board;
+import blokus.framework.Color;
+import blokus.framework.Game;
+import blokus.framework.PieceName;
 
 public class RandomAI implements IPlayer {
 

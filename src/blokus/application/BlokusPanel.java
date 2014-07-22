@@ -1,4 +1,4 @@
-package application;
+package blokus.application;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,12 +20,12 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
-import framework.Action;
-import framework.Board;
-import framework.Board.PlayerView;
-import framework.Color;
-import framework.PieceName;
-import framework.Shape;
+import blokus.framework.Action;
+import blokus.framework.Board;
+import blokus.framework.Color;
+import blokus.framework.PieceName;
+import blokus.framework.Shape;
+import blokus.framework.Board.PlayerView;
 
 public class BlokusPanel extends JPanel {
 	

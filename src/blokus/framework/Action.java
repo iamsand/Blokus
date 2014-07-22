@@ -1,4 +1,4 @@
-package framework;
+package blokus.framework;
 
 /**
  * This class represents a game move.

@@ -1,11 +1,10 @@
-package application.players;
-
-import framework.*;
+package blokus.application.players;
 
 import java.util.List;
 import java.util.Scanner;
 
-import application.IPlayer;
+import blokus.application.IPlayer;
+import blokus.framework.*;
 
 public class HumanConsolePlayer implements IPlayer {
 

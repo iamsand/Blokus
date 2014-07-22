@@ -1,11 +1,11 @@
-package application;
+package blokus.application;
 
 import java.util.List;
 
-import framework.Action;
-import framework.Board;
-import framework.Color;
-import framework.PieceName;
+import blokus.framework.Action;
+import blokus.framework.Board;
+import blokus.framework.Color;
+import blokus.framework.PieceName;
 
 public interface IPlayer {
 	

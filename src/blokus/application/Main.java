@@ -1,15 +1,15 @@
-package application;
+package blokus.application;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.swing.JFrame;
 
-import application.players.RandomAI;
-import framework.Action;
-import framework.Color;
-import framework.Game;
-import framework.Game.Status;
+import blokus.application.players.RandomAI;
+import blokus.framework.Action;
+import blokus.framework.Color;
+import blokus.framework.Game;
+import blokus.framework.Game.Status;
 
 public class Main {
 

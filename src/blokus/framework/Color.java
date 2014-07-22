@@ -1,4 +1,4 @@
-package framework;
+package blokus.framework;
 
 public enum Color {
     

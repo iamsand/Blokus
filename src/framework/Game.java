@@ -102,6 +102,27 @@ public class Game {
 		return false;
 	}
 	
+	public List<Action> allValidMoves(Color color) {
+		LinkedList<Action> allActions = new LinkedList<Action>();
+
+		List<PieceName> currentHand = this.hands.get(color);
+		for (PieceName shape : currentHand) {
+			List<Shape> perms = Shape.createShape(shape).getAllPermutations();
+			for (Shape permutation : perms) {
+				for (int r = 0; r < this.b.getHeight(); r++) {
+					for (int c = 0; c < this.b.getWidth(); c++) {
+						Action tryMe = new Action(permutation, color, r, c);
+						if (b.isActionValid(tryMe)) {
+							allActions.add(tryMe);
+						}
+					}
+				}
+			}
+		}
+
+		return allActions;
+	}
+	
 	public Color getColorToPlay() {
 		return this.activePlayers.peek();
 	}

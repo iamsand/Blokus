@@ -1,19 +1,32 @@
 package application.players;
 
-import framework.*;
-
 import java.util.List;
+import java.util.Random;
 
 import application.IPlayer;
+import framework.Action;
+import framework.Board;
+import framework.Color;
+import framework.Game;
+import framework.PieceName;
 
 public class RandomAI implements IPlayer {
 
+	private Random r = new Random();
+	private Game game;
+	private Color color;
+	
+	public RandomAI(Game game) {
+		this.game = game;
+	}
+	
     public void startGame(int boardWidth, int boardHeight, int numPlayers, Color color) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.color = color;
     }
 
     public Action getAction(Board.PlayerView board, List<PieceName> hand) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    	List<Action> actions = game.allValidMoves(this.color);
+    	return actions.get(r.nextInt(actions.size()));
     }
 
 }

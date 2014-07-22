@@ -10,6 +10,7 @@ import java.util.List;
 public final class Shape implements Comparable<Shape> {
 
 	private final PieceName name;
+	
 	// [coordinate index][0] -> x
 	// [coordinate index][1] -> y
 	private final int[][]	coords;
@@ -69,9 +70,9 @@ public final class Shape implements Comparable<Shape> {
 	private static int[][] rotateCW(int[][] rotateme) {
 		int[][] r = new int[rotateme.length][2];
 		for (int i = 0; i < r.length; i++) {
-			// (x,y) --> (y,-x)
-			r[i][0] = rotateme[i][1];
-			r[i][1] = -rotateme[i][0];
+			// (x,y) --> (-y,x)
+			r[i][0] = -rotateme[i][1];
+			r[i][1] = rotateme[i][0];
 		}
 		return r;
 	}

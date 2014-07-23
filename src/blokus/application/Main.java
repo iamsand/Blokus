@@ -45,6 +45,8 @@ public class Main {
 			blokus.doAction(action);
 		}
 		
+		panel.updateBoard(blokus.getBoardView());
+		frame.pack();
 		frame.setTitle("Blokus - Game over");
 	}
 

@@ -89,14 +89,14 @@ public class BlokusPanel extends JPanel {
 		this.add(this.selectionPanel, BorderLayout.LINE_END);
 	}
 	
-	public void updateBoard(PlayerView view) {
+	public void updateBoard(final PlayerView view) {
 		if (this.grid == null || this.grid.length != view.getHeight() || this.grid[0].length != view.getWidth()) {
 			this.boardPanel.removeAll();
 			this.boardPanel.setLayout(new GridLayout(view.getHeight(), view.getWidth(), BlokusPanel.GAP_SIZE, BlokusPanel.GAP_SIZE));
 			this.grid = new BlokusCell[view.getHeight()][view.getWidth()];
 			for (int i = 0; i < view.getHeight(); i++) {
 				for (int j = 0; j < view.getWidth(); j++) {
-					BlokusCell cell = new BlokusCell(i, j);
+					final BlokusCell cell = new BlokusCell(i, j);
 					cell.setPreferredSize(new Dimension(BlokusPanel.CELL_SIZE, BlokusPanel.CELL_SIZE));
 					cell.setOpaque(true);
 					cell.addMouseListener(new MouseListener() {

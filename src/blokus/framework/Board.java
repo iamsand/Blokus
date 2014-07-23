@@ -91,7 +91,7 @@ public class Board {
             int newY = action.y + coordinate[1];
             
             // verify that the piece does not overlap an existing piece
-			if (this.b[newX][newY] != Color.NULL) {
+			if (this.b[newY][newX] != Color.NULL) {
 				Board.LOGGER.info("Invalid action: overlaps existing piece");
                 return false;
 			}

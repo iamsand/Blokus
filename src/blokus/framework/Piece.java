@@ -103,7 +103,7 @@ public final class Piece {
 			map[2 - coordinate[1]][2 + coordinate[0]] = true;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(30);
 		for (boolean[] row : map) {
 			for (boolean b : row) {
                 sb.append('[');

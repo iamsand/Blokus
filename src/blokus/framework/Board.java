@@ -55,7 +55,7 @@ public class Board {
 	public boolean isActionValid(Action action) {
 		Board.LOGGER.fine("Testing action: " + action);
 		
-		int[][] coordinates = action.shape.getCoordinates();
+		int[][] coordinates = action.piece.getCoordinates();
         for (int[] coordinate : coordinates) {
             int newX = action.x + coordinate[0];
             int newY = action.y + coordinate[1];
@@ -162,7 +162,7 @@ public class Board {
 	 * @param action The action to be played on the board. The action must be valid.
 	 */
 	public void doAction(Action action) {
-        int[][] coordinates = action.shape.getCoordinates();
+        int[][] coordinates = action.piece.getCoordinates();
         for (int[] coordinate : coordinates) {
             this.b[action.y + coordinate[1]][action.x + coordinate[0]] = action.color;
         }

@@ -6,7 +6,7 @@ package blokus.framework;
  */
 public final class Action {
     
-    public final Piece shape;
+    public final Piece piece;
     public final Color color;
     
     /**
@@ -19,8 +19,8 @@ public final class Action {
      */
     public final int y;
     
-    public Action(Piece shape, Color color, int x, int y) {
-        this.shape = shape;
+    public Action(Piece piece, Color color, int x, int y) {
+        this.piece = piece;
         this.color = color;
         this.x = x;
         this.y = y;
@@ -28,7 +28,7 @@ public final class Action {
     
     @Override
     public String toString(){
-    	return "[" + shape.toString() + " " + color + " (" + x + ", " + y + ")" + "]";
+    	return "[" + piece.toString() + " " + color + " (" + x + ", " + y + ")" + "]";
     }
     
 }

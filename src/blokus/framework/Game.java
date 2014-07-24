@@ -46,7 +46,7 @@ public class Game {
 			return false;
 		}
 		
-		if (!this.hands.get(action.color).contains(action.shape.getShape())) {
+		if (!this.hands.get(action.color).contains(action.piece.getShape())) {
 			return false;
 		}
 		
@@ -55,7 +55,7 @@ public class Game {
 		}
 		
 		this.b.doAction(action);
-		this.hands.get(action.color).remove(action.shape.getShape());
+		this.hands.get(action.color).remove(action.piece.getShape());
 		
 		Color played = this.activePlayers.pop();
 		this.activePlayers.add(played);

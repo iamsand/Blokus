@@ -9,14 +9,14 @@ import java.util.List;
  */
 public final class Piece implements Comparable<Piece> {
 
-	private final Shape name;
+	private final Shape shape;
 	
 	// [coordinate index][0] -> x
 	// [coordinate index][1] -> y
 	private final int[][]	coords;
 
 	private Piece(Shape shape, int[][] coords) {
-		this.name = shape;
+		this.shape = shape;
 		this.coords = new int[coords.length][];
 		for (int i = 0; i < coords.length; i++) {
 			this.coords[i] = Arrays.copyOf(coords[i], 2);
@@ -44,7 +44,7 @@ public final class Piece implements Comparable<Piece> {
 	}
 	
 	public Shape getShape() {
-		return this.name;
+		return this.shape;
 	}
 	
 	public Piece reflectHorizontal() {
@@ -54,11 +54,11 @@ public final class Piece implements Comparable<Piece> {
 			r[i][0] = -this.coords[i][0];
 			r[i][1] =  this.coords[i][1];
 		}
-		return new Piece(this.name,r);
+		return new Piece(this.shape,r);
 	}
 	
 	public Piece rotateCW(int n) {
-		return new Piece(this.name,Piece.rotateCW(coords, n));
+		return new Piece(this.shape,Piece.rotateCW(coords, n));
 	}
 
 	private static int[][] rotateCW(int[][] a, int n) {
@@ -79,12 +79,12 @@ public final class Piece implements Comparable<Piece> {
 	
 	@Override
 	public String toString() {
-		return name.toString();
+		return shape.toString();
 	}
 	
 	@Override
 	public int compareTo(Piece s) {
-		return this.name.ordinal() - s.name.ordinal();
+		return this.shape.ordinal() - s.shape.ordinal();
 	}
 
 	public List<Piece> getAllPermutations() {

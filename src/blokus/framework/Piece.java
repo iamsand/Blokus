@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This class represents a game piece shape. Shape objects are immutable.
  */
-public final class Piece implements Comparable<Piece> {
+public final class Piece {
 
 	private final Shape shape;
 	
@@ -82,11 +82,6 @@ public final class Piece implements Comparable<Piece> {
 		return shape.toString();
 	}
 	
-	@Override
-	public int compareTo(Piece s) {
-		return this.shape.ordinal() - s.shape.ordinal();
-	}
-
 	public List<Piece> getAllPermutations() {
         LinkedList<Piece> perms = new LinkedList<Piece>();
         perms.add(this);

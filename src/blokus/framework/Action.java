@@ -6,7 +6,7 @@ package blokus.framework;
  */
 public final class Action {
     
-    public final Shape shape;
+    public final Piece shape;
     public final Color color;
     
     /**
@@ -19,7 +19,7 @@ public final class Action {
      */
     public final int y;
     
-    public Action(Shape shape, Color color, int x, int y) {
+    public Action(Piece shape, Color color, int x, int y) {
         this.shape = shape;
         this.color = color;
         this.x = x;

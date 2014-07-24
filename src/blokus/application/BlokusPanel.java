@@ -23,8 +23,8 @@ import javax.swing.ListSelectionModel;
 import blokus.framework.Action;
 import blokus.framework.Board;
 import blokus.framework.Color;
-import blokus.framework.PieceName;
 import blokus.framework.Shape;
+import blokus.framework.Piece;
 import blokus.framework.Board.PlayerView;
 
 public class BlokusPanel extends JPanel {
@@ -38,8 +38,8 @@ public class BlokusPanel extends JPanel {
 	
 	private BlokusCell[][] grid = null;
 	
-	private final DefaultListModel<PieceName> shapeListModel = new DefaultListModel<PieceName>();
-	private final JList<PieceName> shapeList = new JList<PieceName>(shapeListModel);
+	private final DefaultListModel<Shape> shapeListModel = new DefaultListModel<Shape>();
+	private final JList<Shape> shapeList = new JList<Shape>(shapeListModel);
 	private final JButton btnRotate = new JButton("CW90");
 	private final JButton btnReflect = new JButton("Refl.");
 	
@@ -121,9 +121,9 @@ public class BlokusPanel extends JPanel {
 
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							PieceName selected = BlokusPanel.this.shapeList.getSelectedValue();
+							Shape selected = BlokusPanel.this.shapeList.getSelectedValue();
 							if (selected != null) {
-								Shape shape = Shape.createShape(selected);
+								Piece shape = Piece.createShape(selected);
 								shape = shape.rotateCW(BlokusPanel.this.pieceRotation);
 								if (BlokusPanel.this.pieceReflected) {
 									shape = shape.reflectHorizontal();
@@ -176,10 +176,10 @@ public class BlokusPanel extends JPanel {
 		}
 	}
 	
-	public Action getAction(Color color, List<PieceName> hand) {
+	public Action getAction(Color color, List<Shape> hand) {
 		this.waitingForAction = true;
 		this.shapeListModel.clear();
-		for (PieceName piece : hand) {
+		for (Shape piece : hand) {
 			this.shapeListModel.addElement(piece);
 		}
 		this.shapeList.setSelectedIndex(0);
@@ -222,7 +222,7 @@ public class BlokusPanel extends JPanel {
 		}
 
 		@Override
-		public Action getAction(PlayerView board, List<PieceName> hand) {
+		public Action getAction(PlayerView board, List<Shape> hand) {
 			BlokusPanel.this.updateBoard(board);
 			return BlokusPanel.this.getAction(this.color, hand);
 		}

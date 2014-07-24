@@ -9,7 +9,7 @@ import blokus.framework.Action;
 import blokus.framework.Board;
 import blokus.framework.Color;
 import blokus.framework.Game;
-import blokus.framework.PieceName;
+import blokus.framework.Shape;
 
 public class RandomAI implements IPlayer {
 
@@ -25,7 +25,7 @@ public class RandomAI implements IPlayer {
         this.color = color;
     }
 
-    public Action getAction(Board.PlayerView board, List<PieceName> hand) {
+    public Action getAction(Board.PlayerView board, List<Shape> hand) {
 		Board.LOGGER.setLevel(Level.OFF);
 		
     	List<Action> actions = game.allValidMoves(this.color);

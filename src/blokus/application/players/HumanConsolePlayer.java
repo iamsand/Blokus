@@ -13,7 +13,7 @@ public class HumanConsolePlayer implements IPlayer {
 	private static Scanner sc = new Scanner(System.in);
 	
 	@Override
-	public Action getAction(Board.PlayerView board, List<PieceName> hand) {
+	public Action getAction(Board.PlayerView board, List<Shape> hand) {
 		System.out.println("Begin console input."); // DEBUG ST
 		System.out.println("Choose Piece Index.");
 		int i = sc.nextInt();
@@ -27,7 +27,7 @@ public class HumanConsolePlayer implements IPlayer {
 		int y = sc.nextInt();
 		System.out.println("End console input"); // DEBUG ST
 		
-		Shape s = Shape.createShape(hand.get(i));
+		Piece s = Piece.createShape(hand.get(i));
 		s = s.rotateCW(rot%4);
 		if (ref == 1)
 			s = s.reflectHorizontal();

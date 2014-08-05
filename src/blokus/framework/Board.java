@@ -10,12 +10,6 @@ public class Board {
 	public static final Logger LOGGER = Logger.getLogger(Board.class.getName());
 	{
 		Board.LOGGER.setUseParentHandlers(false);
-		
-		ConsoleHandler handler = new ConsoleHandler();
-		Board.LOGGER.addHandler(handler);
-
-		handler.setLevel(Level.ALL);
-		Board.LOGGER.setLevel(Level.ALL);
 	}
 
 	private static final int  WIDTH_STANDARD = 20;

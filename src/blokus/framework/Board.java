@@ -22,6 +22,7 @@ public class Board {
 	private static final int HEIGHT_STANDARD = 20;
 
 	private final BlokusColor[][] b;
+
     private final int width;
     private final int height;
     
@@ -138,8 +139,7 @@ public class Board {
     private boolean isOnBoard(int x, int y) {
         return x < this.width && x >= 0 && y < this.height && y >= 0;
     }
-	
-    
+
     // The starting corners for each color.
     private int[] startingCoordinate(BlokusColor color) {
         switch (color) {
@@ -180,11 +180,15 @@ public class Board {
 
 		return sb.toString();
 	}
+	
+	public BlokusColor getColor(int x, int y) {
+		return this.b[y][x];
+	}
     
     public class PlayerView {
         
         public BlokusColor getColor(int x, int y) {
-            return Board.this.b[y][x];
+            return Board.this.getColor(x, y);
         }
         
         public BlokusColor[][] getFullBoard() {

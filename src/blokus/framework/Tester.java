@@ -14,10 +14,10 @@ public class Tester {
 
 		Board b = new Board();
         Piece.createShape(Shape.Q2);
-		b.doAction(new Action(s, Color.BLUE, 3, 3));
+		b.doAction(new Action(s, BlokusColor.BLUE, 3, 3));
 		System.out.println(b.toConsoleString());
 		s = s.reflectHorizontal();
-		b.doAction(new Action(s, Color.BLUE, 10, 10));
+		b.doAction(new Action(s, BlokusColor.BLUE, 10, 10));
 		System.out.println(b.toConsoleString());
 	}
 

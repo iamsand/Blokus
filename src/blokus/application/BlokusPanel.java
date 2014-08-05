@@ -22,7 +22,7 @@ import javax.swing.ListSelectionModel;
 
 import blokus.framework.Action;
 import blokus.framework.Board;
-import blokus.framework.Color;
+import blokus.framework.BlokusColor;
 import blokus.framework.Shape;
 import blokus.framework.Piece;
 import blokus.framework.Board.PlayerView;
@@ -33,7 +33,7 @@ public class BlokusPanel extends JPanel {
 	private static final int  GAP_SIZE =  1;
 	
 	private boolean waitingForAction = false;
-	private Color actionColor = Color.NULL;
+	private BlokusColor actionColor = BlokusColor.NULL;
 	private Action action;
 	
 	private BlokusCell[][] grid = null;
@@ -166,7 +166,7 @@ public class BlokusPanel extends JPanel {
 		}
 	}
 	
-	private java.awt.Color convertColor(Color color) {
+	private java.awt.Color convertColor(BlokusColor color) {
 		switch (color) {
 			case BLUE: return java.awt.Color.blue;
 			case YELLOW: return java.awt.Color.yellow;
@@ -176,7 +176,7 @@ public class BlokusPanel extends JPanel {
 		}
 	}
 	
-	public Action getAction(Color color, List<Shape> hand) {
+	public Action getAction(BlokusColor color, List<Shape> hand) {
 		this.waitingForAction = true;
 		this.shapeListModel.clear();
 		for (Shape piece : hand) {
@@ -213,11 +213,11 @@ public class BlokusPanel extends JPanel {
 	
 	public class HumanPlayer implements IPlayer {
 
-		private Color color;
+		private BlokusColor color;
 		
 		@Override
 		public void startGame(int boardWidth, int boardHeight, int numPlayers,
-				Color color) {
+				BlokusColor color) {
 			this.color = color;
 		}
 
@@ -239,12 +239,12 @@ public class BlokusPanel extends JPanel {
 		Board board = new Board();
 		PlayerView view = board.new PlayerView() {
 			@Override
-			public Color getColor(int x, int y) {
+			public BlokusColor getColor(int x, int y) {
 				switch (x % 4) {
-					case 0: return Color.BLUE;
-					case 1: return Color.YELLOW;
-					case 2: return Color.RED;
-					case 3: return Color.GREEN;
+					case 0: return BlokusColor.BLUE;
+					case 1: return BlokusColor.YELLOW;
+					case 2: return BlokusColor.RED;
+					case 3: return BlokusColor.GREEN;
 				}
 					
 				return super.getColor(x, y);
@@ -264,12 +264,12 @@ public class BlokusPanel extends JPanel {
 		Board board = new Board();
 		PlayerView view = board.new PlayerView() {
 			@Override
-			public Color getColor(int x, int y) {
+			public BlokusColor getColor(int x, int y) {
 				switch (y % 4) {
-					case 0: return Color.BLUE;
-					case 1: return Color.YELLOW;
-					case 2: return Color.RED;
-					case 3: return Color.GREEN;
+					case 0: return BlokusColor.BLUE;
+					case 1: return BlokusColor.YELLOW;
+					case 2: return BlokusColor.RED;
+					case 3: return BlokusColor.GREEN;
 				}
 					
 				return super.getColor(x, y);

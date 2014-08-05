@@ -9,12 +9,12 @@ import java.util.TreeMap;
 
 public class Game {
 
-	private static final Color[] PLAY_SEQUENCE	= 
-		{ Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN };
+	private static final BlokusColor[] PLAY_SEQUENCE	= 
+		{ BlokusColor.BLUE, BlokusColor.YELLOW, BlokusColor.RED, BlokusColor.GREEN };
     
-	private final TreeMap<Color, ArrayList<Shape>> hands = new TreeMap<Color, ArrayList<Shape>>();
+	private final TreeMap<BlokusColor, ArrayList<Shape>> hands = new TreeMap<BlokusColor, ArrayList<Shape>>();
     private final Board b = new Board();
-	private final LinkedList<Color> activePlayers = new LinkedList<Color>();
+	private final LinkedList<BlokusColor> activePlayers = new LinkedList<BlokusColor>();
 
 	private Status status = Status.CREATED;
 	
@@ -24,7 +24,7 @@ public class Game {
 		}
 		
 		List<Shape> allPieces = Arrays.asList(Shape.values());
-		for (Color color : PLAY_SEQUENCE) {
+		for (BlokusColor color : PLAY_SEQUENCE) {
 			this.activePlayers.add(color);
 			this.hands.put(color, new ArrayList<Shape>(allPieces));
 		}
@@ -57,7 +57,7 @@ public class Game {
 		this.b.doAction(action);
 		this.hands.get(action.color).remove(action.piece.getShape());
 		
-		Color played = this.activePlayers.pop();
+		BlokusColor played = this.activePlayers.pop();
 		this.activePlayers.add(played);
 		
 		this.evaluateStatus();
@@ -80,7 +80,7 @@ public class Game {
 		return this.status;
 	}
 
-	private boolean hasValidMove(Color color) {
+	private boolean hasValidMove(BlokusColor color) {
 		// System.out.println("hasValidMove()..."); // DEBUG ST
 		// System.out.println(color);
         List<Shape> currentHand = this.hands.get(color);
@@ -102,7 +102,7 @@ public class Game {
 		return false;
 	}
 	
-	public List<Action> allValidMoves(Color color) {
+	public List<Action> allValidMoves(BlokusColor color) {
 		LinkedList<Action> allActions = new LinkedList<Action>();
 
 		List<Shape> currentHand = this.hands.get(color);
@@ -123,7 +123,7 @@ public class Game {
 		return allActions;
 	}
 	
-	public Color getColorToPlay() {
+	public BlokusColor getColorToPlay() {
 		return this.activePlayers.peek();
 	}
 	
@@ -135,7 +135,7 @@ public class Game {
 		return this.b.new PlayerView();
 	}
 	
-	public List<Shape> getHand(Color color) {
+	public List<Shape> getHand(BlokusColor color) {
 		return Collections.unmodifiableList(this.hands.get(color));
 	}
 	

@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import blokus.application.IPlayer;
 import blokus.framework.Action;
 import blokus.framework.Board;
-import blokus.framework.Color;
+import blokus.framework.BlokusColor;
 import blokus.framework.Game;
 import blokus.framework.Shape;
 
@@ -15,13 +15,13 @@ public class RandomAI implements IPlayer {
 
 	private Random r = new Random();
 	private Game game;
-	private Color color;
+	private BlokusColor color;
 	
 	public RandomAI(Game game) {
 		this.game = game;
 	}
 	
-    public void startGame(int boardWidth, int boardHeight, int numPlayers, Color color) {
+    public void startGame(int boardWidth, int boardHeight, int numPlayers, BlokusColor color) {
         this.color = color;
     }
 

@@ -7,7 +7,7 @@ package blokus.framework;
 public final class Action {
     
     public final Piece piece;
-    public final Color color;
+    public final BlokusColor color;
     
     /**
      * X-coordinate of action (left is zero).
@@ -19,7 +19,7 @@ public final class Action {
      */
     public final int y;
     
-    public Action(Piece piece, Color color, int x, int y) {
+    public Action(Piece piece, BlokusColor color, int x, int y) {
         this.piece = piece;
         this.color = color;
         this.x = x;

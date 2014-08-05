@@ -21,7 +21,7 @@ public class Board {
 	private static final int  WIDTH_STANDARD = 20;
 	private static final int HEIGHT_STANDARD = 20;
 
-	private final Color[][] b;
+	private final BlokusColor[][] b;
     private final int width;
     private final int height;
     
@@ -29,9 +29,9 @@ public class Board {
         this.width = Board.WIDTH_STANDARD;
         this.height = Board.HEIGHT_STANDARD;
         
-		this.b = new Color[this.height][this.width];
-		for (Color[] row : this.b) {
-			Arrays.fill(row, Color.NULL);
+		this.b = new BlokusColor[this.height][this.width];
+		for (BlokusColor[] row : this.b) {
+			Arrays.fill(row, BlokusColor.NULL);
 		}
 	}
     
@@ -67,7 +67,7 @@ public class Board {
 
 		// First action test
 		int[] myCorner = this.startingCoordinate(action.color);
-		if (this.b[myCorner[1]][myCorner[0]] == Color.NULL) {
+		if (this.b[myCorner[1]][myCorner[0]] == BlokusColor.NULL) {
 			Board.LOGGER.fine(action.color.name() + " corner is null, first action");
 			int[] corner = this.startingCoordinate(action.color);
 	        for (int[] coordinate : coordinates) {
@@ -91,7 +91,7 @@ public class Board {
             int newY = action.y + coordinate[1];
             
             // verify that the piece does not overlap an existing piece
-			if (this.b[newY][newX] != Color.NULL) {
+			if (this.b[newY][newX] != BlokusColor.NULL) {
 				Board.LOGGER.info("Invalid action: overlaps existing piece");
                 return false;
 			}
@@ -141,7 +141,7 @@ public class Board {
 	
     
     // The starting corners for each color.
-    private int[] startingCoordinate(Color color) {
+    private int[] startingCoordinate(BlokusColor color) {
         switch (color) {
             case BLUE:
                 return new int[] { 0, this.height - 1 };
@@ -170,9 +170,9 @@ public class Board {
 
 	public String toConsoleString() {
 		StringBuilder sb = new StringBuilder();
-		for (Color[] row : this.b) {
-			for (Color c : row) {
-				sb.append("[").append(c == Color.NULL ? ' ' : c.name().charAt(0)).append("]");
+		for (BlokusColor[] row : this.b) {
+			for (BlokusColor c : row) {
+				sb.append("[").append(c == BlokusColor.NULL ? ' ' : c.name().charAt(0)).append("]");
 			}
 
 			sb.append('\n');
@@ -183,12 +183,12 @@ public class Board {
     
     public class PlayerView {
         
-        public Color getColor(int x, int y) {
+        public BlokusColor getColor(int x, int y) {
             return Board.this.b[y][x];
         }
         
-        public Color[][] getFullBoard() {
-            Color[][] r = new Color[Board.this.height][];
+        public BlokusColor[][] getFullBoard() {
+            BlokusColor[][] r = new BlokusColor[Board.this.height][];
             
             for (int i = 0; i < r.length; i++) {
                 r[i] = Arrays.copyOf(Board.this.b[i], Board.this.width);

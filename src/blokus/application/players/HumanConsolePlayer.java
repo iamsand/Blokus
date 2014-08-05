@@ -8,7 +8,7 @@ import blokus.framework.*;
 
 public class HumanConsolePlayer implements IPlayer {
 
-	private Color color = null;
+	private BlokusColor color = null;
 	
 	private static Scanner sc = new Scanner(System.in);
 	
@@ -35,7 +35,7 @@ public class HumanConsolePlayer implements IPlayer {
 	}
 
 	@Override
-	public void startGame(int boardWidth, int boardHeight, int numPlayers, Color color) {
+	public void startGame(int boardWidth, int boardHeight, int numPlayers, BlokusColor color) {
 		this.color = color;
 	}
 }

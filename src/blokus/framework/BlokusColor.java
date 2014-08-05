@@ -1,12 +1,12 @@
 package blokus.framework;
 
-public enum Color {
+public enum BlokusColor {
     
 	NULL, BLUE, YELLOW, RED, GREEN;
     
 	@Override
 	public String toString() {
-		if (this == Color.NULL)
+		if (this == BlokusColor.NULL)
 			return " ";
 		else
 			return this.name().substring(0, 1);
